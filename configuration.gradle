@@ -1,0 +1,5 @@
+ext {
+    springframeworkContextVersion = '5.2.5.RELEASE'
+    springframeworkMongodbDataVersion = '2.2.6.RELEASE'
+    springframeworkJPAVersion = '2.2.6.RELEASE'
+}

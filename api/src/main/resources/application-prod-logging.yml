@@ -1,0 +1,9 @@
+logging:
+  level:
+    root: info
+    cn.jenche: debug
+    org:
+      springframework:
+        data:
+          mongodb:
+            core: debug

@@ -1,0 +1,9 @@
+rootProject.name = 'jceisp'
+include 'service'
+include 'utility'
+include 'dao'
+include 'core'
+include 'objects'
+include 'api'
+include 'service-test'
+
