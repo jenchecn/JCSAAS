@@ -6,4 +6,3 @@ spring:
       database: JCEISP
       username: admin
       password: admin
-
