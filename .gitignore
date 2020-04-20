@@ -144,4 +144,4 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 # prod file lgnore
-*-prod.yml
+/**/*-prod.yml
