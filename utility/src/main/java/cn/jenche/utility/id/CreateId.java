@@ -22,9 +22,11 @@ public class CreateId {
     private long workerId = 1L;
 
     private int count = 0; //数量
+    
     @Getter
     private long currentId = 0L;
 
+    @Getter
     private List<Long> currentids = new ArrayList<>();
 
     public static CreateId GetInstance() {
@@ -58,7 +60,7 @@ public class CreateId {
         for (int i = 0; i < count; i++) {
             final long workerId = this.workerId;
             final long dataCenter = this.dataCenter;
-  
+
             Future<Long> future = exec.submit(worker::nextId);
 
             try {
