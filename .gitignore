@@ -50,7 +50,7 @@ cmake-build-*/
 
 # IntelliJ
 out/
-
+/**/bin
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
@@ -146,3 +146,8 @@ gradle-app.setting
 # prod file lgnore
 /**/*-prod.yml
 /**/*-prod-*.yml
+workspace
+.project
+.classpath
+/**/.settings
+/lombok.config

@@ -1,6 +1,6 @@
-package cn.jenche.jceisp.dao.mongodb;
+package cn.jenche.saas.dao.mongodb;
 
-import cn.jenche.jceisp.entity.ClientEntity;
+import cn.jenche.saas.entity.ClientEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
@@ -9,6 +9,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @Date: 2020/4/20 15:46
  * @Description: ClientRepository
  */
-
 public interface ClientRepository extends MongoRepository<ClientEntity, String> {
 }

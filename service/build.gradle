@@ -27,6 +27,7 @@ repositories {
 dependencies {
     implementation project(':objects')
     implementation project(':dao')
+    implementation project(':core')
     implementation 'org.springframework:spring-context:' + springframeworkContextVersion
     implementation 'org.springframework.data:spring-data-mongodb:' + springframeworkMongodbDataVersion
     developmentOnly 'org.projectlombok:lombok:1.18.8'

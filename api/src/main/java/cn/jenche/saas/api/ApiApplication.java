@@ -1,4 +1,4 @@
-package cn.jenche.jceisp.api;
+package cn.jenche.saas.api;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +14,8 @@ import org.springframework.context.annotation.ComponentScans;
  */
 @SpringBootApplication
 @ComponentScans({
-        @ComponentScan(value = "cn.jenche.jceisp")
+        @ComponentScan(value = "cn.jenche.saas.service"),
+        @ComponentScan(value = "cn.jenche.saas.dao")
 })
 public class ApiApplication implements CommandLineRunner {
     public static void main(String[] args) {
@@ -23,6 +24,5 @@ public class ApiApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-
     }
 }

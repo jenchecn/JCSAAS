@@ -6,8 +6,7 @@ group 'cn.jenche.jceisp.dao'
 version '1.0-SNAPSHOT'
 
 apply from: '../configuration.gradle'
-apply plugin: 'java'
-sourceCompatibility = 1.8
+
 
 configurations {
     developmentOnly

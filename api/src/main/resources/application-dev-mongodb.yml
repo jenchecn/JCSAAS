@@ -4,5 +4,5 @@ spring:
       host: localhost
       port: 27017
       database: JCEISP
-      username: admin
-      password: admin
+      username: user
+      password: user

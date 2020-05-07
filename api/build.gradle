@@ -27,6 +27,9 @@ repositories {
 
 dependencies {
     implementation project(':service')
+    implementation project(':core')
+    implementation project(':objects')
+    implementation project(':utility')
     implementation(group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2')
     implementation(group: 'com.github.xiaoymin', name: 'knife4j-spring-boot-starter', version: '2.0.2')
     implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-web')
