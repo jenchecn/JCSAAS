@@ -22,12 +22,12 @@ public class CreateId {
     private long workerId = 1L;
 
     private int count = 0; //数量
-    
+
     @Getter
     private long currentId = 0L;
 
     @Getter
-    private List<Long> currentids = new ArrayList<>();
+    private List<Long> currentIds = new ArrayList<>();
 
     public static CreateId GetInstance() {
         if (instance == null) {
@@ -64,7 +64,7 @@ public class CreateId {
             Future<Long> future = exec.submit(worker::nextId);
 
             try {
-                currentids.add(future.get());
+                currentIds.add(future.get());
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }

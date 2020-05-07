@@ -18,7 +18,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class IdTest {
     @Test
     public void getIdTest() {
-        Object o = CreateId.GetInstance().setCount(10).createId();
+        //生成一组
+        Object o = CreateId.GetInstance().setCount(10).createId().getCurrentIds();
 
+        //生成一个
+        Object b = CreateId.GetInstance().createId().getCurrentId();
     }
 }
