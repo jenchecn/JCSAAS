@@ -1,4 +1,4 @@
-rootProject.name = 'jceisp'
+rootProject.name = 'jcsaas'
 include 'service'
 include 'utility'
 include 'dao'
