@@ -1,6 +1,7 @@
 package cn.jenche.saas.service;
 
 import cn.jenche.core.Pager;
+import cn.jenche.core.SystemException;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -31,5 +32,12 @@ public interface IBaseService<E> {
      * @param entity 保存的实体 type is {@link E}
      * @return 修改后的数据{@link E}
      */
-    E UPDATE(E entity);
+    E UPDATE(E entity) throws SystemException;
+
+    /**
+     * 删除数据
+     *
+     * @param id 需要删除数据的Id
+     */
+    void DELETE(String id) throws SystemException;
 }

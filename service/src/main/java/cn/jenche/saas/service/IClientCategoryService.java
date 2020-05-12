@@ -7,5 +7,4 @@ package cn.jenche.saas.service;
  * @Description: 终端类型
  */
 public interface IClientCategoryService<T> extends IBaseService<T> {
-    
 }

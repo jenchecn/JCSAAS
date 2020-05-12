@@ -1,6 +1,7 @@
 package cn.jenche.saas.api;
 
 import cn.jenche.core.Pager;
+import cn.jenche.core.SystemException;
 import cn.jenche.saas.entity.ClientCategoryEntity;
 import cn.jenche.saas.service.IClientCategoryService;
 import cn.jenche.saas.type.ClientCategoryType;
@@ -26,8 +27,34 @@ public class ClientCagtegoryTest {
     @Autowired
     IClientCategoryService<ClientCategoryEntity> clientCategoryService;
 
+
+    @Test
+    public void ListTest() {
+        Object o = clientCategoryService.LIST_PAGES(new Pager<>());
+        System.out.println(o);
+        Assert.assertNotNull(o);
+    }
+
     @Test
     public void SaveTest() {
+        ClientCategoryType type = ClientCategoryType.V2;
+        ClientCategoryEntity clientCategoryEntity = new ClientCategoryEntity();
+        clientCategoryEntity.setId(String.valueOf(type.getCode()));
+        clientCategoryEntity.setName(type.getName());
+        clientCategoryEntity.setType(type);
+        clientCategoryEntity.setAisles(new ArrayList<Integer>() {{
+            add(12);
+            add(12);
+            add(13);
+            add(14);
+        }});
+
+        clientCategoryEntity = clientCategoryService.SAVE(clientCategoryEntity);
+        Assert.assertNotNull(clientCategoryEntity);
+    }
+
+    @Test
+    public void UpdateTest() throws SystemException {
         ClientCategoryType type = ClientCategoryType.V1;
         ClientCategoryEntity clientCategoryEntity = new ClientCategoryEntity();
         clientCategoryEntity.setId(String.valueOf(type.getCode()));
@@ -45,8 +72,8 @@ public class ClientCagtegoryTest {
     }
 
     @Test
-    public void ListTest() {
-        Object o = clientCategoryService.LIST_PAGES(new Pager<>());
-        Assert.assertNotNull(o);
+    public void DeleteTest() throws SystemException {
+        ClientCategoryType type = ClientCategoryType.V2;
+        clientCategoryService.DELETE(String.valueOf(type.getCode()));
     }
 }

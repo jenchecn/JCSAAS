@@ -1,6 +1,8 @@
 package cn.jenche.saas.service.impl;
 
+import cn.jenche.core.ExceptionMessage;
 import cn.jenche.core.Pager;
+import cn.jenche.core.SystemException;
 import cn.jenche.saas.dao.mongodb.ClientCategoryRepository;
 import cn.jenche.saas.entity.ClientCategoryEntity;
 import cn.jenche.saas.service.IClientCategoryService;
@@ -36,7 +38,20 @@ public class ClientCategoryServiceImpl implements IClientCategoryService<ClientC
     }
 
     @Override
-    public ClientCategoryEntity UPDATE(ClientCategoryEntity entity) {
-        return SAVE(entity);
+    public void DELETE(String id) throws SystemException {
+        try {
+            clientCategoryRepository.deleteById(id);
+        } catch (Exception ex) {
+            throw new SystemException(ExceptionMessage.DELETE_ERROR, ex);
+        }
+    }
+
+    @Override
+    public ClientCategoryEntity UPDATE(ClientCategoryEntity entity) throws SystemException {
+        if (clientCategoryRepository.existsById(entity.getId())) {
+            return SAVE(entity);
+        }
+
+        throw new SystemException(ExceptionMessage.DATA_NOTEXISTS);
     }
 }

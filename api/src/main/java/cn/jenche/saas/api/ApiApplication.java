@@ -14,8 +14,10 @@ import org.springframework.context.annotation.ComponentScans;
  */
 @SpringBootApplication
 @ComponentScans({
+        @ComponentScan(value = "cn.jenche.core"),
         @ComponentScan(value = "cn.jenche.saas.service"),
         @ComponentScan(value = "cn.jenche.saas.dao")
+
 })
 public class ApiApplication implements CommandLineRunner {
     public static void main(String[] args) {

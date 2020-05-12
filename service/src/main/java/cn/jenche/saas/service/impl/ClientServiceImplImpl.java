@@ -38,4 +38,9 @@ public class ClientServiceImplImpl implements IClientService<ClientEntity> {
     public ClientEntity UPDATE(ClientEntity entity) {
         return SAVE(entity);
     }
+
+    @Override
+    public void DELETE(String id) {
+        clientRepository.deleteById(id);
+    }
 }
