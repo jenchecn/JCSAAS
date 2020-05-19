@@ -30,10 +30,12 @@ dependencies {
     implementation project(':core')
     implementation project(':objects')
     implementation project(':utility')
-    implementation(group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2')
     implementation(group: 'com.github.xiaoymin', name: 'knife4j-spring-boot-starter', version: '2.0.2')
     implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-web')
 
+    developmentOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    developmentOnly(group: 'org.springframework.boot', name: 'spring-boot-starter-actuator')
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
