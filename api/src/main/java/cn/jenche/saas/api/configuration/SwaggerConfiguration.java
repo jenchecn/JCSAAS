@@ -30,9 +30,9 @@ public class SwaggerConfiguration {
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 //分组名称
-                .groupName("1.X版本")
+                .groupName("1.0.0版本")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("cn.jenche.sass.api.controller"))
+                .apis(RequestHandlerSelectors.basePackage("cn.jenche"))
                 .paths(PathSelectors.any())
                 .build();
         return docket;

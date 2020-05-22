@@ -17,7 +17,7 @@ public class FilterConfiguration {
     public FilterRegistrationBean PublicAPIFilter() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new PublicFilterHandle());//实例化Filter类
-        filterRegistrationBean.addUrlPatterns("/api/*");//设置匹配模式,这里设置为所有，可以按需求设置为"/hello"等等
+        filterRegistrationBean.addUrlPatterns("/api/*");//设置匹配模式 API路径下的都需要进行筛选器筛选
         filterRegistrationBean.setOrder(1);//设置执行顺序
         return filterRegistrationBean;
     }
