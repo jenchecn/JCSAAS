@@ -42,7 +42,7 @@ public class ClientCategoryServiceImpl implements IClientCategoryService<ClientC
         try {
             clientCategoryRepository.deleteById(id);
         } catch (Exception ex) {
-            throw new SystemException(ExceptionMessage.DELETE_ERROR, ex);
+            throw new SystemException(ExceptionMessage.S_20_DELETE_ERROR, ex);
         }
     }
 
@@ -52,6 +52,6 @@ public class ClientCategoryServiceImpl implements IClientCategoryService<ClientC
             return SAVE(entity);
         }
 
-        throw new SystemException(ExceptionMessage.DATA_NOTEXISTS);
+        throw new SystemException(ExceptionMessage.S_20_DATA_NOTEXISTS);
     }
 }

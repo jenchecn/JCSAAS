@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Copyright Copyright (c) 2020 By www.jenche.cn
  * @Author: jenche <jenchecn@outlook.com>
  * @Date: 2020/5/19 13:29
- * @Description:
+ * @Description: Swagger2配置文件，配置相关文档
  */
 @Configuration
 @EnableSwagger2

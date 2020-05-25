@@ -24,6 +24,8 @@ repositories {
 }
 
 dependencies {
+    implementation project(':objects')
+    implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.58'
     //Spring Data Commons: Pager convert to Pageable need it!
     implementation 'org.springframework.data:spring-data-commons:' + springframeworkMongodbDataVersion
     implementation 'org.springframework:spring-context:' + springframeworkContextVersion

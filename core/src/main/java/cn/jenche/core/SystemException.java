@@ -1,5 +1,7 @@
 package cn.jenche.core;
 
+import lombok.Getter;
+
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
  * @Author: jenche <jenchecn@outlook.com>
@@ -8,6 +10,8 @@ package cn.jenche.core;
  */
 public class SystemException extends Exception {
 
+    @Getter
+    private int errCode = -1;
 
     public SystemException() {
         super();
@@ -18,21 +22,15 @@ public class SystemException extends Exception {
      */
     public SystemException(ExceptionMessage exceptionMessage) {
         super(exceptionMessage.getMsg());
+        this.errCode = exceptionMessage.getCode();
     }
 
     public SystemException(ExceptionMessage exceptionMessage, Throwable cause) {
         super(exceptionMessage.getMsg(), cause);
+        this.errCode = exceptionMessage.getCode();
     }
 
     public SystemException(String message) {
         super(message);
-    }
-
-    public SystemException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public SystemException(Throwable cause) {
-        super(cause);
     }
 }
