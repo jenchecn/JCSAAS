@@ -26,10 +26,10 @@ import javax.validation.Valid;
 @Api(tags = "终端分类管理")
 @RestController
 public class ClientCategoryController extends BaseController {
-    private final IClientCategoryService clientCategoryService;
+    private final IClientCategoryService<ClientCategoryEntity> clientCategoryService;
 
     @Autowired
-    public ClientCategoryController(IClientCategoryService clientCategoryService) {
+    public ClientCategoryController(IClientCategoryService<ClientCategoryEntity> clientCategoryService) {
         this.clientCategoryService = clientCategoryService;
     }
 
@@ -37,7 +37,7 @@ public class ClientCategoryController extends BaseController {
     @RequestMapping(value = "/client/category", method = RequestMethod.GET)
     public ResponseResultDTO list(@Valid PagerDTO pagerDTO, BindingResult bindingResult) throws SystemException {
         Pager<ClientCategoryEntity> list = clientCategoryService.LIST_PAGES(
-                new Pager(
+                new Pager<>(
                         pagerDTO.getPageNo(),
                         pagerDTO.getPageSize())
         );

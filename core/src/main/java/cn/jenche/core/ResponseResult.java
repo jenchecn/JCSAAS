@@ -38,20 +38,43 @@ public class ResponseResult<T> {
         }
     }
 
+    /**
+     * 将结果转成{@link String}
+     *
+     * @return 转换成string类型的结果，通过JSON转换器
+     * @throws SystemException 自定义的系统异常
+     */
     public String toJson() throws SystemException {
         validData();
         return JSON.toJSONString(this.resultDTO);
     }
 
+    /**
+     * 提交DTO数据
+     *
+     * @return 提交DTO数据传输实体
+     * @throws SystemException 自定义的系统异常
+     */
     public ResponseResultDTO toDTO() throws SystemException {
         validData();
         return this.resultDTO;
     }
 
+    /**
+     * 默认转成DTO
+     *
+     * @return 使用 {@see toDTO()}
+     * @throws SystemException 自定义的系统异常
+     */
     public ResponseResultDTO build() throws SystemException {
         return toDTO();
     }
 
+    /**
+     * 检验检查数据，根据数据类型检查并抛出异常
+     *
+     * @throws SystemException 自定义的系统异常
+     */
     private void validData() throws SystemException {
         if (resultDTO.getCode() > 0) {
             return;
