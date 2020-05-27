@@ -3,6 +3,7 @@ package cn.jenche.saas.api.controller;
 import cn.jenche.core.Pager;
 import cn.jenche.core.ResponseResult;
 import cn.jenche.core.SystemException;
+import cn.jenche.saas.dto.ClientCategoryDTO;
 import cn.jenche.saas.dto.PagerDTO;
 import cn.jenche.saas.dto.ResponseResultDTO;
 import cn.jenche.saas.entity.ClientCategoryEntity;
@@ -11,9 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -42,6 +41,34 @@ public class ClientCategoryController extends BaseController {
                         pagerDTO.getPageSize())
         );
 
-        return new ResponseResult<String>(bindingResult, list).build();
+        return new ResponseResult<String>(bindingResult, list).send();
+    }
+
+    @ApiOperation("指定Id")
+    @PostMapping(value = "/client/category/{id}")
+    public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
+        ClientCategoryEntity entity = clientCategoryService.ONE_BYID(id);
+        return new ResponseResult<>(entity).send();
+    }
+
+    @ApiOperation("保存")
+    @PostMapping(value = "/client/category/save")
+    public ResponseResultDTO save(@Valid ClientCategoryDTO clientCategoryDTO, BindingResult bindingResult) throws SystemException {
+        ClientCategoryEntity entity = clientCategoryService.SAVE(clientCategoryDTO);
+        return new ResponseResult<ClientCategoryEntity>(bindingResult, entity).send();
+    }
+
+    @ApiOperation("修改")
+    @PostMapping(value = "/client/category/update")
+    public ResponseResultDTO update(@Valid ClientCategoryDTO clientCategoryDTO, BindingResult bindingResult) throws SystemException {
+        ClientCategoryEntity entity = clientCategoryService.UPDATE(clientCategoryDTO);
+        return new ResponseResult<ClientCategoryEntity>(bindingResult, entity).send();
+    }
+
+    @ApiOperation("删除")
+    @PostMapping(value = "/client/category/delete/{id}")
+    public ResponseResultDTO delete(@PathVariable(value = "id") String id) throws SystemException {
+        clientCategoryService.DELETE(id);
+        return new ResponseResult<ClientCategoryEntity>().succeed().send();
     }
 }

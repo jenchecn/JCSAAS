@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
  * @Author: jenche <jenchecn@outlook.com>
@@ -24,6 +26,12 @@ public class ClientCategoryServiceImpl implements IClientCategoryService<ClientC
     @Autowired
     public ClientCategoryServiceImpl(ClientCategoryRepository clientCategoryRepository) {
         this.clientCategoryRepository = clientCategoryRepository;
+    }
+
+    @Override
+    public ClientCategoryEntity ONE_BYID(String id) {
+        Optional<ClientCategoryEntity> optional = clientCategoryRepository.findById(id);
+        return optional.orElse(null);
     }
 
     @Override

@@ -18,6 +18,13 @@ import java.util.Map;
 public class ResponseResult<T> {
     private ResponseResultDTO resultDTO = new ResponseResultDTO();
 
+    public ResponseResult() {
+    }
+
+    public ResponseResult(T t) {
+        this.resultDTO.setData(t);
+    }
+
     public ResponseResult(ResponseResultDTO responseResultDTO) {
         this.resultDTO = responseResultDTO;
     }
@@ -60,13 +67,20 @@ public class ResponseResult<T> {
         return this.resultDTO;
     }
 
+    public ResponseResult<T> succeed() {
+        this.resultDTO.setCode(0);
+        this.resultDTO.setMessage(null);
+        this.resultDTO.setData(true);
+        return this;
+    }
+
     /**
      * 默认转成DTO
      *
      * @return 使用 {@see toDTO()}
      * @throws SystemException 自定义的系统异常
      */
-    public ResponseResultDTO build() throws SystemException {
+    public ResponseResultDTO send() throws SystemException {
         return toDTO();
     }
 
@@ -81,6 +95,10 @@ public class ResponseResult<T> {
         }
 
         Object data = this.resultDTO.getData();
+        if (data == null) {
+            throw new SystemException(ExceptionMessage.C_50_DATA_IS_EMPTY);
+        }
+
         //如果是List
         if (data instanceof List) {
             List<?> _ldata = (List<?>) data;

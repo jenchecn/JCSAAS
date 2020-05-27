@@ -24,6 +24,11 @@ public class ClientServiceImplImpl implements IClientService<ClientEntity> {
     }
 
     @Override
+    public ClientEntity ONE_BYID(String id) {
+        return null;
+    }
+
+    @Override
     public Pager<ClientEntity> LIST_PAGES(Pager<ClientEntity> pager) {
         Page<ClientEntity> data = clientRepository.findAll(pager.getPageable());
         return pager.convert(data);

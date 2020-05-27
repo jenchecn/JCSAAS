@@ -1,9 +1,11 @@
 package cn.jenche.saas.entity;
 
 import cn.jenche.saas.type.ClientCategoryType;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -19,15 +21,19 @@ public class ClientCategoryEntity extends BaseEntity {
     /**
      * 分类名称
      */
+    @ApiModelProperty(value = "名称", required = true)
+    @NotBlank(message = "不允许空")
     private String name;
 
     /**
      * 分类代码
      */
+    @ApiModelProperty(value = "分类代码")
     private ClientCategoryType type;
 
     /**
      * 货道信息
      */
+    @ApiModelProperty(value = "货道信息")
     private List<Integer> aisles;
 }

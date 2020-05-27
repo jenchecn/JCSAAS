@@ -11,6 +11,14 @@ import cn.jenche.core.SystemException;
  */
 public interface IBaseService<E> {
     /**
+     * 根据Id获取数据
+     *
+     * @param id Id
+     * @return E
+     */
+    E ONE_BYID(String id);
+
+    /**
      * 获取所有终端数据
      *
      * @param pager 分页
