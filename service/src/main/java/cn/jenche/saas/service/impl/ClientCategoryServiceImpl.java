@@ -1,7 +1,5 @@
 package cn.jenche.saas.service.impl;
 
-import cn.jenche.core.ExceptionMessage;
-import cn.jenche.core.SystemException;
 import cn.jenche.saas.dao.mongodb.ClientCategoryRepository;
 import cn.jenche.saas.entity.ClientCategoryEntity;
 import cn.jenche.saas.service.IClientCategoryService;
@@ -17,20 +15,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ClientCategoryServiceImpl extends BaseServiceImpl<ClientCategoryEntity> implements IClientCategoryService {
-    private final ClientCategoryRepository clientCategoryRepository;
-
     @Autowired
     public ClientCategoryServiceImpl(ClientCategoryRepository clientCategoryRepository) {
         super(clientCategoryRepository);
-        this.clientCategoryRepository = clientCategoryRepository;
-    }
-
-    @Override
-    public ClientCategoryEntity UPDATE(ClientCategoryEntity entity) throws SystemException {
-        if (clientCategoryRepository.existsById(entity.getId())) {
-            return SAVE(entity);
-        }
-
-        throw new SystemException(ExceptionMessage.S_20_DATA_NOTEXISTS);
     }
 }

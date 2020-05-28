@@ -1,8 +1,10 @@
 package cn.jenche.saas.service.impl;
 
+import cn.jenche.core.ExceptionMessage;
 import cn.jenche.core.Pager;
 import cn.jenche.core.SystemException;
 import cn.jenche.saas.service.IBaseService;
+import cn.jenche.utility.GenericsUtility;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.io.Serializable;
@@ -36,7 +38,20 @@ public abstract class BaseServiceImpl<E> implements IBaseService<E> {
     }
 
     @Override
-    public abstract E UPDATE(E entity) throws SystemException;
+    public E UPDATE(E entity) throws SystemException {
+        Object o = GenericsUtility.GetInstance().findFieldBy(entity, "id");
+        if (o == null) {
+            throw new SystemException(ExceptionMessage.S_20_FINDFIELD_ERROR);
+        }
+
+        String _id = o.toString();
+
+        if (repository.existsById(_id)) {
+            return SAVE(entity);
+        }
+
+        throw new SystemException(ExceptionMessage.S_20_DATA_NOTEXISTS);
+    }
 
     @Override
     public void DELETE(Serializable... ids) throws SystemException {
@@ -47,6 +62,9 @@ public abstract class BaseServiceImpl<E> implements IBaseService<E> {
                     repository.deleteById(_id);
                 }
             }
+            return;
         }
+        
+        throw new SystemException(ExceptionMessage.S_20_DELETE_ERROR);
     }
 }
