@@ -1,7 +1,7 @@
 package cn.jenche.saas.api;
 
 import cn.jenche.core.Pager;
-import cn.jenche.saas.entity.ClientEntity;
+import cn.jenche.core.SystemException;
 import cn.jenche.saas.service.IClientService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,10 +19,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest
 public class ClientServiceTest {
     @Autowired
-    private IClientService<ClientEntity> clientService;
+    private IClientService clientService;
 
     @Test
-    public void ClientList() {
+    public void ClientList() throws SystemException {
         Object o = clientService.LIST_PAGES(new Pager<>());
     }
 }

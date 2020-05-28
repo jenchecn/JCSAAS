@@ -1,7 +1,6 @@
 package cn.jenche.saas.service.impl;
 
 import cn.jenche.core.ExceptionMessage;
-import cn.jenche.core.Pager;
 import cn.jenche.core.SystemException;
 import cn.jenche.saas.dao.mongodb.ConsignerRepository;
 import cn.jenche.saas.entity.ConsignerEntity;
@@ -16,37 +15,17 @@ import org.springframework.stereotype.Service;
  * @Description: 委托相关服务
  */
 @Service
-public class ConsignerServiceImpl implements IConsignerService {
-    private final ConsignerRepository consignerRepository;
-
+public class ConsignerServiceImpl extends BaseServiceImpl<ConsignerEntity> implements IConsignerService {
     @Autowired
     public ConsignerServiceImpl(ConsignerRepository consignerRepository) {
-        this.consignerRepository = consignerRepository;
-    }
-
-    @Override
-    public ConsignerEntity ONE_BYID(String id) throws SystemException {
-        throw new SystemException(ExceptionMessage.S_20_NOT_IMPLEMENT);
-    }
-
-    @Override
-    public Pager<ConsignerEntity> LIST_PAGES(Pager<ConsignerEntity> pager) throws SystemException {
-        throw new SystemException(ExceptionMessage.S_20_NOT_IMPLEMENT);
-    }
-
-    @Override
-    public ConsignerEntity SAVE(ConsignerEntity entity) throws SystemException {
-        //throw new SystemException(ExceptionMessage.S_20_NOT_IMPLEMENT);
-        return consignerRepository.save(entity);
+        super(consignerRepository);
     }
 
     @Override
     public ConsignerEntity UPDATE(ConsignerEntity entity) throws SystemException {
-        throw new SystemException(ExceptionMessage.S_20_NOT_IMPLEMENT);
-    }
-
-    @Override
-    public void DELETE(String id) throws SystemException {
-        throw new SystemException(ExceptionMessage.S_20_NOT_IMPLEMENT);
+        if (super.repository.existsById(entity.getId())) {
+            return SAVE(entity);
+        }
+        throw new SystemException(ExceptionMessage.S_20_DATA_NOTEXISTS);
     }
 }

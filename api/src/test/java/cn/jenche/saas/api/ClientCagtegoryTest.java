@@ -25,18 +25,18 @@ import java.util.ArrayList;
 @SpringBootTest
 public class ClientCagtegoryTest {
     @Autowired
-    IClientCategoryService<ClientCategoryEntity> clientCategoryService;
+    IClientCategoryService clientCategoryService;
 
 
     @Test
-    public void ListTest() {
+    public void ListTest() throws SystemException {
         Object o = clientCategoryService.LIST_PAGES(new Pager<>());
         System.out.println(o);
         Assert.assertNotNull(o);
     }
 
     @Test
-    public void SaveTest() {
+    public void SaveTest() throws SystemException {
         ClientCategoryType type = ClientCategoryType.V2;
         ClientCategoryEntity clientCategoryEntity = new ClientCategoryEntity();
         clientCategoryEntity.setId(String.valueOf(type.getCode()));

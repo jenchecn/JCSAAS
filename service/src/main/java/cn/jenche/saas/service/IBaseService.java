@@ -3,6 +3,8 @@ package cn.jenche.saas.service;
 import cn.jenche.core.Pager;
 import cn.jenche.core.SystemException;
 
+import java.io.Serializable;
+
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
  * @Author: jenche <jenchecn@outlook.com>
@@ -50,8 +52,8 @@ public interface IBaseService<E> {
     /**
      * 删除数据
      *
-     * @param id 需要删除数据的Id
+     * @param ids 需要删除数据的Id
      * @throws SystemException 系统自定义异常
      */
-    void DELETE(String id) throws SystemException;
+    void DELETE(Serializable... ids) throws SystemException;
 }

@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +30,13 @@ public class ConsignerController extends BaseController {
     @Autowired
     public ConsignerController(IConsignerService consignerService) {
         this.consignerService = consignerService;
+    }
+
+    @ApiOperation("根据ID获取数据")
+    @PostMapping("/consigner/{id}")
+    public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
+        ConsignerEntity entity = consignerService.ONE_BYID(id);
+        return new ResponseResult<>(entity).send();
     }
 
     @ApiOperation("保存")

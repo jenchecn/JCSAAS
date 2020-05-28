@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Date;
  * @Description:
  */
 @Data
-public class BaseEntity {
+public class BaseEntity implements Serializable {
     @Id
     @ApiModelProperty(value = "id")
     private String id;

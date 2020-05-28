@@ -1,16 +1,12 @@
 package cn.jenche.saas.service.impl;
 
 import cn.jenche.core.ExceptionMessage;
-import cn.jenche.core.Pager;
 import cn.jenche.core.SystemException;
 import cn.jenche.saas.dao.mongodb.ClientCategoryRepository;
 import cn.jenche.saas.entity.ClientCategoryEntity;
 import cn.jenche.saas.service.IClientCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -20,38 +16,13 @@ import java.util.Optional;
  */
 
 @Service
-public class ClientCategoryServiceImpl implements IClientCategoryService {
+public class ClientCategoryServiceImpl extends BaseServiceImpl<ClientCategoryEntity> implements IClientCategoryService {
     private final ClientCategoryRepository clientCategoryRepository;
 
     @Autowired
     public ClientCategoryServiceImpl(ClientCategoryRepository clientCategoryRepository) {
+        super(clientCategoryRepository);
         this.clientCategoryRepository = clientCategoryRepository;
-    }
-
-    @Override
-    public ClientCategoryEntity ONE_BYID(String id) {
-        Optional<ClientCategoryEntity> optional = clientCategoryRepository.findById(id);
-        return optional.orElse(null);
-    }
-
-    @Override
-    public Pager<ClientCategoryEntity> LIST_PAGES(Pager<ClientCategoryEntity> pager) {
-        Page<ClientCategoryEntity> data = clientCategoryRepository.findAll(pager.getPageable());
-        return pager.convert(data);
-    }
-
-    @Override
-    public ClientCategoryEntity SAVE(ClientCategoryEntity entity) {
-        return clientCategoryRepository.save(entity);
-    }
-
-    @Override
-    public void DELETE(String id) throws SystemException {
-        try {
-            clientCategoryRepository.deleteById(id);
-        } catch (Exception ex) {
-            throw new SystemException(ExceptionMessage.S_20_DELETE_ERROR, ex);
-        }
     }
 
     @Override
