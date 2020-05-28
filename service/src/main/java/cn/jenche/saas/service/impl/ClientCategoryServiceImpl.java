@@ -20,7 +20,7 @@ import java.util.Optional;
  */
 
 @Service
-public class ClientCategoryServiceImpl implements IClientCategoryService<ClientCategoryEntity> {
+public class ClientCategoryServiceImpl implements IClientCategoryService {
     private final ClientCategoryRepository clientCategoryRepository;
 
     @Autowired

@@ -1,12 +1,16 @@
 package cn.jenche.saas.service.impl;
 
+import cn.jenche.core.ExceptionMessage;
 import cn.jenche.core.Pager;
+import cn.jenche.core.SystemException;
 import cn.jenche.saas.dao.mongodb.ClientRepository;
 import cn.jenche.saas.entity.ClientEntity;
 import cn.jenche.saas.service.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -15,7 +19,7 @@ import org.springframework.stereotype.Service;
  * @Description:
  */
 @Service
-public class ClientServiceImplImpl implements IClientService<ClientEntity> {
+public class ClientServiceImplImpl implements IClientService {
     private final ClientRepository clientRepository;
 
     @Autowired
@@ -25,7 +29,8 @@ public class ClientServiceImplImpl implements IClientService<ClientEntity> {
 
     @Override
     public ClientEntity ONE_BYID(String id) {
-        return null;
+        Optional<ClientEntity> entity = clientRepository.findById(id);
+        return entity.orElse(null);
     }
 
     @Override
@@ -40,8 +45,11 @@ public class ClientServiceImplImpl implements IClientService<ClientEntity> {
     }
 
     @Override
-    public ClientEntity UPDATE(ClientEntity entity) {
-        return SAVE(entity);
+    public ClientEntity UPDATE(ClientEntity entity) throws SystemException {
+        if (clientRepository.existsById(entity.getId())) {
+            return SAVE(entity);
+        }
+        throw new SystemException(ExceptionMessage.S_20_DATA_NOTEXISTS);
     }
 
     @Override

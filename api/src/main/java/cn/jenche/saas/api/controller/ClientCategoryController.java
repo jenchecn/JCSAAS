@@ -25,10 +25,10 @@ import javax.validation.Valid;
 @Api(tags = "终端分类管理")
 @RestController
 public class ClientCategoryController extends BaseController {
-    private final IClientCategoryService<ClientCategoryEntity> clientCategoryService;
+    private final IClientCategoryService clientCategoryService;
 
     @Autowired
-    public ClientCategoryController(IClientCategoryService<ClientCategoryEntity> clientCategoryService) {
+    public ClientCategoryController(IClientCategoryService clientCategoryService) {
         this.clientCategoryService = clientCategoryService;
     }
 
@@ -44,7 +44,7 @@ public class ClientCategoryController extends BaseController {
         return new ResponseResult<String>(bindingResult, list).send();
     }
 
-    @ApiOperation("指定Id")
+    @ApiOperation("根据ID获取数据")
     @PostMapping(value = "/client/category/{id}")
     public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
         ClientCategoryEntity entity = clientCategoryService.ONE_BYID(id);
