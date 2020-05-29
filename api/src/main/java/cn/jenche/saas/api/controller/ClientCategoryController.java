@@ -35,13 +35,13 @@ public class ClientCategoryController extends BaseController {
     @ApiOperation("列表")
     @RequestMapping(value = "/client/category", method = RequestMethod.GET)
     public ResponseResultDTO list(@Valid PagerDTO pagerDTO, BindingResult bindingResult) throws SystemException {
-        Pager<ClientCategoryEntity> list = clientCategoryService.LIST_PAGES(
-                new Pager<>(
-                        pagerDTO.getPageNo(),
-                        pagerDTO.getPageSize())
-        );
-
-        return new ResponseResult<String>(bindingResult, list).send();
+        return new ResponseResult<String>(
+                bindingResult,
+                () -> clientCategoryService.LIST_PAGES(
+                        new Pager<>(
+                                pagerDTO.getPageNo(),
+                                pagerDTO.getPageSize()))
+        ).send();
     }
 
     @ApiOperation("根据ID获取数据")
@@ -54,15 +54,19 @@ public class ClientCategoryController extends BaseController {
     @ApiOperation("保存")
     @PostMapping(value = "/client/category/save")
     public ResponseResultDTO save(@Valid ClientCategoryDTO clientCategoryDTO, BindingResult bindingResult) throws SystemException {
-        ClientCategoryEntity entity = clientCategoryService.SAVE(clientCategoryDTO);
-        return new ResponseResult<ClientCategoryEntity>(bindingResult, entity).send();
+        return new ResponseResult<ClientCategoryEntity>(
+                bindingResult,
+                () -> clientCategoryService.SAVE(clientCategoryDTO)
+        ).send();
     }
 
     @ApiOperation("修改")
     @PostMapping(value = "/client/category/update")
     public ResponseResultDTO update(@Valid ClientCategoryDTO clientCategoryDTO, BindingResult bindingResult) throws SystemException {
-        ClientCategoryEntity entity = clientCategoryService.UPDATE(clientCategoryDTO);
-        return new ResponseResult<ClientCategoryEntity>(bindingResult, entity).send();
+        return new ResponseResult<ClientCategoryEntity>(
+                bindingResult,
+                () -> clientCategoryService.UPDATE(clientCategoryDTO)
+        ).send();
     }
 
     @ApiOperation("删除")

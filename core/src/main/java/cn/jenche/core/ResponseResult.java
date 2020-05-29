@@ -21,8 +21,8 @@ public class ResponseResult<T> {
     public ResponseResult() {
     }
 
-    public ResponseResult(T t) {
-        this.resultDTO.setData(t);
+    public ResponseResult(Object data) {
+        this.resultDTO.setData(data);
     }
 
     public ResponseResult(ResponseResultDTO responseResultDTO) {
@@ -34,15 +34,12 @@ public class ResponseResult<T> {
         this.resultDTO.setMessage(exceptionMessage.getMsg());
     }
 
-    public ResponseResult(BindingResult bindingResult, Object data) throws SystemException {
+    public ResponseResult(BindingResult bindingResult, CallBack callBack) throws SystemException {
         if (bindingResult.hasErrors()) {
             log.debug("<{}> detail:{}", ExceptionMessage.C_50_PARAMS_EXCPTION, bindingResult.getFieldError());
             throw new SystemException(ExceptionMessage.C_50_PARAMS_EXCPTION);
         }
-
-        if (data != null) {
-            this.resultDTO.setData(data);
-        }
+        this.resultDTO.setData(callBack.execute());
     }
 
     /**

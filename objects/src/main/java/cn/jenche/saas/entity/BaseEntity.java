@@ -12,7 +12,9 @@ import java.util.Date;
  * @Copyright Copyright (c) 2020 By www.jenche.cn
  * @Author: jenche <jenchecn@outlook.com>
  * @Date: 2020/4/21 14:59
- * @Description:
+ * @Description: 公共Entity
+ * <p/>当不需要数据中存在保存数据时需要在字段上注解{@see @Transient}
+ * <p/>或者将DTO重新复制到Entity中，保证数据的统一性
  */
 @Data
 public class BaseEntity implements Serializable {
