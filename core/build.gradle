@@ -29,7 +29,13 @@ dependencies {
     //Spring Data Commons: Pager convert to Pageable need it!
     implementation 'org.springframework.data:spring-data-commons:' + springframeworkMongodbDataVersion
     implementation 'org.springframework:spring-context:' + springframeworkContextVersion
-    developmentOnly 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+
+	//lombok
+	developmentOnly 'org.projectlombok:lombok:1.18.12'
+	annotationProcessor 'org.projectlombok:lombok:1.18.12'
+	
+	testCompileOnly 'org.projectlombok:lombok:1.18.12'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+	
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

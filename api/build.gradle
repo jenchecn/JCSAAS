@@ -33,8 +33,13 @@ dependencies {
     implementation(group: 'com.github.xiaoymin', name: 'knife4j-spring-boot-starter', version: '2.0.2')
     implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-web')
 
-    developmentOnly 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+	//lombok
+	implementation 'org.projectlombok:lombok:1.18.12'
+	annotationProcessor 'org.projectlombok:lombok:1.18.12'
+	
+	testCompileOnly 'org.projectlombok:lombok:1.18.12'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+	
     developmentOnly(group: 'org.springframework.boot', name: 'spring-boot-starter-actuator')
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation('org.springframework.boot:spring-boot-starter-test')
