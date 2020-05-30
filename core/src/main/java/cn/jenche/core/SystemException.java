@@ -25,6 +25,11 @@ public class SystemException extends Exception {
         this.errCode = exceptionMessage.getCode();
     }
 
+    public SystemException(ExceptionMessage exceptionMessage, String message) {
+        super(exceptionMessage.getMsg().concat(message));
+        this.errCode = exceptionMessage.getCode();
+    }
+
     public SystemException(ExceptionMessage exceptionMessage, Throwable cause) {
         super(exceptionMessage.getMsg(), cause);
         this.errCode = exceptionMessage.getCode();

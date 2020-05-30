@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -36,8 +37,9 @@ public class ResponseResult<T> {
 
     public ResponseResult(BindingResult bindingResult, CallBack callBack) throws SystemException {
         if (bindingResult.hasErrors()) {
-            log.debug("<{}> detail:{}", ExceptionMessage.C_50_PARAMS_EXCPTION, bindingResult.getFieldError());
-            throw new SystemException(ExceptionMessage.C_50_PARAMS_EXCPTION);
+            String defaultMessage = Objects.requireNonNull(bindingResult.getFieldError()).getField().concat(" Field ").concat("is Blank.");
+            log.debug("<{}> detail:{}", ExceptionMessage.C_50_PARAMS_EXCPTION, defaultMessage);
+            throw new SystemException(ExceptionMessage.C_50_PARAMS_EXCPTION, defaultMessage);
         }
         this.resultDTO.setData(callBack.execute());
     }
