@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
  * @Date: 2020年5月30日 下午4:58:09
  * @Description: 区/镇服务
  */
-@Api(tags = "区/镇")
+@Api(tags = "区域")
 @RestController
 public class DistrictController extends BaseController{
 	private final IDistrictService districtService;

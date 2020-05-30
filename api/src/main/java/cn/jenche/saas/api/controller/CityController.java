@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
  * @Date: 2020年5月30日 下午3:02:41
  * @Description: 市/县 
  */
-@Api(tags = "市/县")
+@Api(tags = "区域")
 @RestController
 public class CityController extends BaseController {
 	private final ICityService cityService;

@@ -23,7 +23,7 @@ import java.util.List;
  * @Date: 2020/5/30 11:38
  * @Description: 省/直辖市控制器
  */
-@Api(tags = "省/直辖市")
+@Api(tags = "区域")
 @RestController
 public class ProvinceController extends BaseController {
     private final IProvinceService provinceService;
