@@ -13,15 +13,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @Description: 区/镇
  */
 @Data
-@Document(collation = "district")
+@Document(collection = "district")
 @ApiModel(value = "区/镇")
 public class DistrictEntity extends BaseEntity {
-    @ApiModelProperty(value = "名字")
+    
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(value = "名字",required = true)
     private String name;
 
-    @ApiModelProperty(value = "代码")
+    @ApiModelProperty(value = "代码",required = true)
     private String code;
 
-    @ApiModelProperty(value = "所属父级")
+    @ApiModelProperty(value = "所属父级",required = true)
     private String parentId;
 }

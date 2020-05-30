@@ -32,7 +32,7 @@ public class ClientEntity extends BaseEntity {
     private String iMei;
 
     /**
-     * 终端所在的地址 例如：北京市朝阳区朝阳门外大家乙12号东门
+     * 终端所在的地址 例如：北京市朝阳区朝阳门外大街乙12号东门
      */
     private String address;
 

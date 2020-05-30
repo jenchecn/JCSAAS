@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @Description: 市/县
  */
 @Data
-@Document(collation = "city")
+@Document(collection = "city")
 @ApiModel(value = "市/县")
 public class CityEntity extends BaseEntity {
     @ApiModelProperty(value = "名字", required = true)

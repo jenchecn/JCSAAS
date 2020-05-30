@@ -23,7 +23,7 @@ import java.util.List;
  * @Date: 2020/5/30 11:38
  * @Description: 省/直辖市控制器
  */
-@Api(tags = "地区")
+@Api(tags = "省/直辖市")
 @RestController
 public class ProvinceController extends BaseController {
     private final IProvinceService provinceService;
@@ -33,19 +33,27 @@ public class ProvinceController extends BaseController {
         this.provinceService = provinceService;
     }
 
-    @ApiOperation("列表")
+    @ApiOperation("省/直辖市列表")
     @GetMapping(value = "/location/province")
     public ResponseResultDTO list() throws SystemException {
         List<ProvinceEntity> list = provinceService.LIST();
         return new ResponseResult<>(list).send();
     }
 
-    @ApiOperation("保存")
+    @ApiOperation("省/直辖市添加")
     @PostMapping(value = "/location/province/save")
     public ResponseResultDTO save(@Valid ProvinceDTO provinceDTO, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<>(
                 bindingResult,
                 () -> provinceService.SAVE(provinceDTO)
         ).send();
+    }
+    @ApiOperation("省/直辖市修改")
+    @PostMapping(value="/loscation/province/update")
+    public ResponseResultDTO update(@Valid ProvinceDTO provinceDTO,BindingResult bindingResult) throws SystemException{
+    	return new ResponseResult<>(
+    			bindingResult,
+    			() -> provinceService.UPDATE(provinceDTO)
+    			).send();
     }
 }
