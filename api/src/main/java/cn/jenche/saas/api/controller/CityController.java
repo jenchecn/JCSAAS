@@ -8,8 +8,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import cn.jenche.core.ResponseResult;
 import cn.jenche.core.SystemException;
 import cn.jenche.saas.dto.CityDTO;
@@ -42,6 +44,12 @@ public class CityController extends BaseController {
         return new ResponseResult<>(list).send();
     }
 
+	@ApiOperation("根据ID获取市/县")
+	@PostMapping(value = "/location/city/{id}")
+	public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
+		CityEntity entity = cityService.ONE_BYID(id);
+		return new ResponseResult<>(entity).send();
+	}
     @ApiOperation("市/县添加")
     @PostMapping(value = "/location/city/save")
     public ResponseResultDTO save(@Valid CityDTO cityDTO, BindingResult bindingResult) throws SystemException {
