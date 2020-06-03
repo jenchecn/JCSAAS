@@ -32,14 +32,10 @@ public class ClientEntity extends BaseEntity {
     private String iMei;
 
     /**
-     * 终端所在的地址 例如：北京市朝阳区朝阳门外大街乙12号东门
+     * 委托实体ID
      */
-    private String address;
-
-    /**
-     * 终端所在位置，使用经纬度表示位置123.999,23.999
-     */
-    private String location;
+    @Field(value = "consigner_id")
+    private String consignerId;
 
     /**
      * 当前终端状态
