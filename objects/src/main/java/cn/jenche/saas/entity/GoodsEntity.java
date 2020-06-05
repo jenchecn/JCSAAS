@@ -32,14 +32,20 @@ public class GoodsEntity extends BaseEntity {
     private String CoverImage;
 
     /**
-     * 商品进价
+     * 商品成本
      */
-    @Field(value = "buy_price")
-    private double buyPrice;
+    @Field(value = "cost")
+    private double cost;
+
+    /**
+     * 原价
+     */
+    @Field(value = "orig")
+    private double orig;
 
     /**
      * 销售给顾客的价格
      */
-    @Field(value = "sell_price")
-    private double sellPrice;
+    @Field(value = "price")
+    private double price;
 }

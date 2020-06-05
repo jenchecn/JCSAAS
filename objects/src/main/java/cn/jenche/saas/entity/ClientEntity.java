@@ -38,7 +38,15 @@ public class ClientEntity extends BaseEntity {
     private String consignerId;
 
     /**
-     * 当前终端状态
+     * 启用虚拟货道
+     * <p>默认关闭</p>
      */
-    private boolean status;
+    @Field(value = "enable_virtual_aisle")
+    private boolean enableVirtualAisle = false;
+
+    /**
+     * 当前终端状态
+     * <p>默认关闭</p>
+     */
+    private boolean status = false;
 }
