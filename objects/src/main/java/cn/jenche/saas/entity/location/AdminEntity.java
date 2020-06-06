@@ -14,6 +14,7 @@ import lombok.Data;
  */
 @Data
 @Document(collection = "admin")
+
 public class AdminEntity extends BaseEntity{
 	@ApiModelProperty(value = "用户名", required = true)
 	private String name;

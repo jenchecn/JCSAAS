@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
  * @Description:
  */
 @Service
-public class ClientServiceImplImpl extends BaseServiceImpl<ClientEntity> implements IClientService {
+public class ClientServiceImpl extends BaseServiceImpl<ClientEntity> implements IClientService {
     @Autowired
-    public ClientServiceImplImpl(ClientRepository clientRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository) {
         super(clientRepository);
     }
 }
