@@ -14,7 +14,7 @@ import lombok.Data;
  * @Description: 管理员
  */
 @Data
-@ApiModel(value = "管理员")
+@ApiModel(value = "终端虚拟")
 public class AdminDTO extends AdminEntity {
 
 }

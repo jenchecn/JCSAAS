@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,5 +60,12 @@ public class GoodsController extends BaseController {
 	@PostMapping(value = "/goods/update")
 	public ResponseResultDTO update(@Valid GoodsDTO goodsDTO, BindingResult bindingResult) throws SystemException {
 		return new ResponseResult<GoodsEntity>(bindingResult, () -> goodsService.UPDATE(goodsDTO)).send();
+	}
+
+	@ApiOperation("删除")
+	@PostMapping(value = "/goods/delete/{id}")
+	public ResponseResultDTO delete(@PathVariable(value = "id") String id) throws SystemException {
+		goodsService.DELETE(id);
+		return new ResponseResult<GoodsEntity>().succeed().send();
 	}
 }
