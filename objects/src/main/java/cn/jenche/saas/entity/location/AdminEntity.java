@@ -1,10 +1,10 @@
-
 package cn.jenche.saas.entity.location;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import cn.jenche.saas.entity.BaseEntity;
+import cn.jenche.saas.type.AdminRule;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -15,11 +15,17 @@ import lombok.Data;
 @Data
 @Document(collection = "admin")
 
-public class AdminEntity extends BaseEntity{
-	@ApiModelProperty(value = "用户名", required = true)
-	private String name;
+public class AdminEntity extends BaseEntity {
+    @ApiModelProperty(value = "用户名", required = true)
+    private String name;
 
-	@ApiModelProperty(value = "密码", required = true)
-	private String password;
-	
+    @ApiModelProperty(value = "密码", required = true)
+    private String password;
+
+    /**
+     * 管理员角色
+     */
+    @ApiModelProperty(value = "角色", required = true)
+    private AdminRule rule;
+
 }
