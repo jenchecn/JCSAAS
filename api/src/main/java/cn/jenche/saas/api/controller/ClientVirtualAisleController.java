@@ -48,9 +48,9 @@ public ResponseResultDTO list(@Valid PagerDTO pagerDTO, BindingResult bindingRes
 }
 
 @ApiOperation("根据终端code获取虚拟货道")
-@PostMapping(value = "/clientVirtualAisle/{id}")
-public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
-	ClientVirtualAisleEntity entity = clientVirtualAisleService.ONE_BYID(id);
+@PostMapping(value = "/clientVirtualAisle/{code}")
+public ResponseResultDTO byCode(@PathVariable(value = "code") String code) throws SystemException {
+	ClientVirtualAisleEntity entity = clientVirtualAisleService.ONE_BYID(code);
 	return new ResponseResult<>(entity).send();
 }
 
