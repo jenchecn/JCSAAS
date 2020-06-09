@@ -47,7 +47,7 @@ public class ClientPhysicsAisleController extends BaseController {
 						.send();
 	}
 
-	@ApiOperation("根据ID获取信息")
+	@ApiOperation("根据终端code获取物理货道")
 	@PostMapping(value = "/clientPhysicsAisle/{id}")
 	public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
 		ClientPhysicsAisleEntity entity = clientPhysicsAisleService.ONE_BYID(id);
