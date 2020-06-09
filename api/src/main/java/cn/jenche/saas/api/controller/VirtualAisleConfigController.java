@@ -47,6 +47,12 @@ public class VirtualAisleConfigController extends BaseController {
 						.send();
 	}
 
+	@ApiOperation("根据ID获取虚拟货道配置")
+	@PostMapping(value = "/virtualAisleConfig/{id}")
+	public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
+		VirtualAisleConfigEntity entity = virtualAisleConfigService.ONE_BYID(id);
+		return new ResponseResult<>(entity).send();
+	}
 
 	@ApiOperation("虚拟货道添加")
 	@PostMapping(value = "/virtualAisleConfig/save")

@@ -47,6 +47,14 @@ public class GoodsCategoryController extends BaseController {
 				() -> goodsCategoryService.LIST_PAGES(new Pager<>(pagerDTO.getPageNo(), pagerDTO.getPageSize())))
 						.send();
 	}
+
+	@ApiOperation("根据ID获取商品")
+	@PostMapping(value = "/goodscategory/{id}")
+	public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
+		GoodsCategoryEntity entity = goodsCategoryService.ONE_BYID(id);
+		return new ResponseResult<>(entity).send();
+	}
+
 	@ApiOperation("保存")
 	@PostMapping(value = "/goodscategory/save")
 	public ResponseResultDTO save(@Valid GoodsCategoryDTO goodsCategoryDTO, BindingResult bindingResult)
