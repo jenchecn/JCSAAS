@@ -6,7 +6,7 @@ package cn.jenche.saas.service.impl;
 import cn.jenche.core.ExceptionMessage;
 import cn.jenche.core.SystemException;
 import cn.jenche.saas.dao.mongodb.AdminRepository;
-import cn.jenche.saas.entity.location.AdminEntity;
+import cn.jenche.saas.entity.AdminEntity;
 import cn.jenche.saas.service.IAdminService;
 import cn.jenche.utility.EncryptUtility;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -15,4 +15,6 @@ import cn.jenche.saas.entity.ClientPhysicsAisleEntity;
  */
 public interface ClientPhysicsAisleRepository extends MongoRepository<ClientPhysicsAisleEntity, String> {
 
+	ClientPhysicsAisleEntity findOneByCode(String code);
+
 }

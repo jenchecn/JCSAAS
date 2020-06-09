@@ -1,6 +1,5 @@
-package cn.jenche.saas.entity.location;
+package cn.jenche.saas.entity;
 
-import cn.jenche.saas.entity.BaseEntity;
 import cn.jenche.saas.type.AdminRule;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

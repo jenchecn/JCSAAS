@@ -47,10 +47,10 @@ public class ClientController extends BaseController {
 				() -> clientService.LIST_PAGES(new Pager<>(pagerDTO.getPageNo(), pagerDTO.getPageSize()))).send();
 	}
 
-	@ApiOperation("根据ID获取数据")
-	@PostMapping(value = "/client/{id}")
-	public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
-		ClientEntity entity = clientService.ONE_BYID(id);
+	@ApiOperation("根据code获取实体数据")
+	@PostMapping(value = "/client/{code}")
+	public ResponseResultDTO byCode(@PathVariable(value = "code") String code) throws SystemException {
+		ClientEntity entity = clientService.ONE_BYCODE(code);
 		return new ResponseResult<>(entity).send();
 	}
 

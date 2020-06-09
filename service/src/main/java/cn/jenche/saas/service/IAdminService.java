@@ -2,7 +2,7 @@ package cn.jenche.saas.service;
 
 import java.util.List;
 
-import cn.jenche.saas.entity.location.AdminEntity;
+import cn.jenche.saas.entity.AdminEntity;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn

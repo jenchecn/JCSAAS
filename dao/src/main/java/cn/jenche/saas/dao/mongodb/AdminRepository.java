@@ -1,7 +1,8 @@
 package cn.jenche.saas.dao.mongodb;
 
-import cn.jenche.saas.entity.location.AdminEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import cn.jenche.saas.entity.AdminEntity;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn

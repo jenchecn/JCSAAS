@@ -9,4 +9,6 @@ import cn.jenche.saas.entity.ClientEntity;
  * @Description: 终端服务
  */
 public interface IClientService extends IBaseService<ClientEntity> {
+
+	ClientEntity ONE_BYCODE(String code);
 }

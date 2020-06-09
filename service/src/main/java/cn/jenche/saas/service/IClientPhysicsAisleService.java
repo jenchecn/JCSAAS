@@ -21,4 +21,6 @@ public interface IClientPhysicsAisleService extends IBaseService<ClientPhysicsAi
 	 * @return {@link List<ClientPhysicsAisleEntity>}
 	 */
 	List<ClientPhysicsAisleEntity> LIST();
+
+	ClientPhysicsAisleEntity ONE_BYCODE(String code);
 }
