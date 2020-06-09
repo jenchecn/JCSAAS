@@ -1,15 +1,19 @@
 /**
- * 
+ *
  */
 package cn.jenche.saas.service.impl;
-import java.util.List;
 
+import cn.jenche.core.ExceptionMessage;
+import cn.jenche.core.SystemException;
+import cn.jenche.saas.dao.mongodb.AdminRepository;
+import cn.jenche.saas.entity.location.AdminEntity;
+import cn.jenche.saas.service.IAdminService;
+import cn.jenche.utility.EncryptUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
-import cn.jenche.saas.entity.location.AdminEntity;
-import cn.jenche.saas.service.IAdminService;
+import java.util.List;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -19,13 +23,31 @@ import cn.jenche.saas.service.IAdminService;
  */
 @Service
 public class AdminServiceImpl extends BaseServiceImpl<AdminEntity> implements IAdminService {
-	@Autowired
-	public AdminServiceImpl(MongoRepository<AdminEntity, String> repository) {
-		super(repository);
-	}
+    private final AdminRepository adminRepository;
 
-	@Override
-	public List<AdminEntity> LIST() {
-		return repository.findAll();
-	}
+    @Autowired
+    public AdminServiceImpl(MongoRepository<AdminEntity, String> repository, AdminRepository adminRepository) {
+        super(repository);
+        this.adminRepository = adminRepository;
+    }
+
+    @Override
+    public AdminEntity SAVE(AdminEntity entity) throws SystemException {
+        //检查用户是否已经存在过
+        boolean isExist = adminRepository.existsByName(entity.getName());
+        if (isExist) {
+            throw new SystemException(ExceptionMessage.S_20_DATA_EXISTS);
+        }
+
+        String passWord = entity.getPassword();
+        passWord = EncryptUtility.getSha(passWord, null);
+        entity.setPassword(passWord);
+
+        return adminRepository.save(entity);
+    }
+
+    @Override
+    public List<AdminEntity> LIST() {
+        return repository.findAll();
+    }
 }
