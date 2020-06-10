@@ -15,4 +15,5 @@ import cn.jenche.saas.entity.ClientVirtualAisleEntity;
  */
 public interface ClientVirtualAisleRepository extends MongoRepository<ClientVirtualAisleEntity, String> {
 
+	ClientVirtualAisleEntity findOneByCode(String code);
 }

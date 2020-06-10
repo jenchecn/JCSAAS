@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiOperation;
  * @Date: 2020年6月6日 上午11:30:06
  * @Description: 终端物理货道控制层
  */
-@Api(tags = "终端物理货道")
+@Api(tags = "终端虚拟货道")
 @RestController
 public class ClientPhysicsAisleController extends BaseController {
 	private final IClientPhysicsAisleService clientPhysicsAisleService;
@@ -39,7 +39,7 @@ public class ClientPhysicsAisleController extends BaseController {
 		this.clientPhysicsAisleService = clientPhysicsAisleService;
 	}
 
-	@ApiOperation("物理货道列表")
+	@ApiOperation("虚拟货道列表")
 	@GetMapping(value = "/clientPhysicsAisle")
 	public ResponseResultDTO list(@Valid PagerDTO pagerDTO, BindingResult bindingResult) throws SystemException {
 		return new ResponseResult<String>(bindingResult,
@@ -47,21 +47,21 @@ public class ClientPhysicsAisleController extends BaseController {
 						.send();
 	}
 
-	@ApiOperation("根据终端code获取物理货道")
+	@ApiOperation("根据终端code获取虚拟货道")
 	@PostMapping(value = "/clientPhysicsAisle/{code}")
 	public ResponseResultDTO byCode(@PathVariable(value = "code") String code) throws SystemException {
-		ClientPhysicsAisleEntity entity = clientPhysicsAisleService.ONE_BYID(code);
+		ClientPhysicsAisleEntity entity = clientPhysicsAisleService.ONE_BYCODE(code);
 		return new ResponseResult<>(entity).send();
 	}
 
-	@ApiOperation("物理货道添加")
+	@ApiOperation("虚拟货道添加")
 	@PostMapping(value = "/clientPhysicsAisle/save")
 	public ResponseResultDTO save(@Valid ClientPhysicsAisleDTO clientPhysicsAisleDTO, BindingResult bindingResult)
 			throws SystemException {
 		return new ResponseResult<>(bindingResult, () -> clientPhysicsAisleService.SAVE(clientPhysicsAisleDTO)).send();
 	}
 
-	@ApiOperation("物理货道修改")
+	@ApiOperation("虚拟货道修改")
 	@PostMapping(value = "/clientPhysicsAisle/update")
 	public ResponseResultDTO update(@Valid ClientPhysicsAisleDTO clientPhysicsAisleDTO, BindingResult bindingResult)
 			throws SystemException {
@@ -70,7 +70,7 @@ public class ClientPhysicsAisleController extends BaseController {
 
 	}
 
-	@ApiOperation("物理货道删除")
+	@ApiOperation("虚拟货道删除")
 	@PostMapping(value = "/clientPhysicsAisle/delete/{id}")
 	public ResponseResultDTO delete(@PathVariable(value = "id") String id) throws SystemException {
 		clientPhysicsAisleService.DELETE(id);

@@ -3,7 +3,7 @@
  */
 package cn.jenche.saas.dto;
 
-import cn.jenche.saas.entity.location.AdminEntity;
+import cn.jenche.saas.entity.AdminEntity;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 

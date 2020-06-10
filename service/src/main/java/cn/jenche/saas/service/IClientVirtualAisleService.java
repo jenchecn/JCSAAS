@@ -13,4 +13,6 @@ import cn.jenche.saas.entity.ClientVirtualAisleEntity;
  */
 public interface IClientVirtualAisleService extends IBaseService<ClientVirtualAisleEntity> {
 
+	ClientVirtualAisleEntity ONE_BYCODE(String code);
+
 }

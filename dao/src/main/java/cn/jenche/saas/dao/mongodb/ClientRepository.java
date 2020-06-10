@@ -1,7 +1,8 @@
 package cn.jenche.saas.dao.mongodb;
 
-import cn.jenche.saas.entity.ClientEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import cn.jenche.saas.entity.ClientEntity;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -10,4 +11,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @Description: ClientRepository
  */
 public interface ClientRepository extends MongoRepository<ClientEntity, String> {
+
+	ClientEntity findOneByCode(String code);
 }

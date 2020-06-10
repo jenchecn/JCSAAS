@@ -6,7 +6,7 @@ import cn.jenche.core.SystemException;
 import cn.jenche.saas.dto.AdminDTO;
 import cn.jenche.saas.dto.PagerDTO;
 import cn.jenche.saas.dto.ResponseResultDTO;
-import cn.jenche.saas.entity.location.AdminEntity;
+import cn.jenche.saas.entity.AdminEntity;
 import cn.jenche.saas.service.IAdminService;
 import cn.jenche.saas.type.AdminRule;
 import io.swagger.annotations.Api;

@@ -1,6 +1,6 @@
 package cn.jenche.saas.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 import cn.jenche.saas.dao.mongodb.ClientRepository;
@@ -15,8 +15,18 @@ import cn.jenche.saas.service.IClientService;
  */
 @Service
 public class ClientServiceImpl extends BaseServiceImpl<ClientEntity> implements IClientService {
-    @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository) {
-        super(clientRepository);
-    }
+	private final ClientRepository clientRepository;
+
+	public ClientServiceImpl(MongoRepository<ClientEntity, String> repository, ClientRepository clientRepository) {
+		super(repository);
+		this.clientRepository = clientRepository;
+
+	}
+
+	@Override
+	public ClientEntity ONE_BYCODE(String code) {
+		return clientRepository.findOneByCode(code);
+	}
+
 }
+
