@@ -34,6 +34,6 @@ public class ClientCategoryEntity extends BaseEntity {
     /**
      * 货道信息
      */
-    @ApiModelProperty(value = "货道信息")
+    @ApiModelProperty(value = "货道信息，当前设备支持的货道信息，例如：1,2,3,4,5,11,12,13,14,15,21,22,23,24,25")
     private List<Integer> aisles;
 }

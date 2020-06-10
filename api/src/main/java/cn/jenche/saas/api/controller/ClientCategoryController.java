@@ -8,6 +8,7 @@ import cn.jenche.saas.dto.PagerDTO;
 import cn.jenche.saas.dto.ResponseResultDTO;
 import cn.jenche.saas.entity.ClientCategoryEntity;
 import cn.jenche.saas.service.IClientCategoryService;
+import cn.jenche.saas.type.ClientCategoryType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -51,7 +56,7 @@ public class ClientCategoryController extends BaseController {
         return new ResponseResult<>(entity).send();
     }
 
-    @ApiOperation("保存")
+    @ApiOperation("新增")
     @PostMapping(value = "/client/category/save")
     public ResponseResultDTO save(@Valid ClientCategoryDTO clientCategoryDTO, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<ClientCategoryEntity>(
@@ -74,5 +79,17 @@ public class ClientCategoryController extends BaseController {
     public ResponseResultDTO delete(@PathVariable(value = "id") String id) throws SystemException {
         clientCategoryService.DELETE(id);
         return new ResponseResult<ClientCategoryEntity>().succeed().send();
+    }
+
+    @ApiOperation("类型")
+    @PostMapping(value = "/client/category/type")
+    public ResponseResultDTO type() throws SystemException {
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (ClientCategoryType value : ClientCategoryType.values()) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put(value.name(), value.getName());
+            list.add(map);
+        }
+        return new ResponseResult<>(list).send();
     }
 }

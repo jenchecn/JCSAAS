@@ -42,41 +42,41 @@ public class AdminController extends BaseController {
 
 
     @ApiOperation("管理员列表")
-    @GetMapping(value = "/location/admin")
+    @GetMapping(value = "/admin")
     public ResponseResultDTO list(@Valid PagerDTO pagerDTO, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<String>(bindingResult,
                 () -> adminService.LIST_PAGES(new Pager<>(pagerDTO.getPageNo(), pagerDTO.getPageSize()))).send();
     }
 
     @ApiOperation("根据ID获取用户")
-    @PostMapping(value = "/location/admin/{id}")
+    @PostMapping(value = "/admin/{id}")
     public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
         AdminEntity entity = adminService.ONE_BYID(id);
         return new ResponseResult<>(entity).send();
     }
 
     @ApiOperation("管理员添加")
-    @PostMapping(value = "/location/admin/save")
+    @PostMapping(value = "/admin/save")
     public ResponseResultDTO save(@Valid AdminDTO adminDTO, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<>(bindingResult, () -> adminService.SAVE(adminDTO)).send();
     }
 
     @ApiOperation("管理员修改")
-    @PostMapping(value = "/location/admin/update")
+    @PostMapping(value = "/admin/update")
     public ResponseResultDTO update(@Valid AdminDTO adminDTO, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<>(bindingResult, () -> adminService.UPDATE(adminDTO)).send();
 
     }
 
     @ApiOperation("管理员删除")
-    @PostMapping(value = "/location/admin/delete/{id}")
+    @PostMapping(value = "/admin/delete/{id}")
     public ResponseResultDTO delete(@PathVariable(value = "id") String id) throws SystemException {
         adminService.DELETE(id);
         return new ResponseResult<AdminEntity>().succeed().send();
     }
 
     @ApiOperation("管理员角色")
-    @GetMapping(value = "/location/admin/rule")
+    @GetMapping(value = "/admin/rule")
     public ResponseResultDTO rule() throws SystemException {
         List<Map<String, Object>> list = new LinkedList<>();
         for (AdminRule rule : AdminRule.values()) {

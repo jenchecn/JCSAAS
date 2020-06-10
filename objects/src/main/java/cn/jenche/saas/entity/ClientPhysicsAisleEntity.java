@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class ClientPhysicsAisleEntity extends BaseEntity {
     @Field(value = "client_id")
     @ApiModelProperty("终端Id")
-    private String ClientId;
+    private String clientId;
 
     @Field(value = "aisle_number")
     @ApiModelProperty("货道号码")
@@ -34,19 +34,19 @@ public class ClientPhysicsAisleEntity extends BaseEntity {
      * 100（正常） - 10（折扣） = 90（支付）
      * </p>
      */
-    @ApiModelProperty("折扣")
-    private int discount;
+    @ApiModelProperty(value = "折扣", example = "0")
+    private int discount = 0;
 
     /**
      * 库存
      */
-    @ApiModelProperty("库存量")
-    private int inventory;
+    @ApiModelProperty(value = "库存量", example = "0")
+    private int inventory = 0;
 
     /**
      * 货道是否可用
      * <p>默认可用</p>
      */
-    @ApiModelProperty("货道是否可用")
+    @ApiModelProperty(value = "货道是否可用", example = "true")
     private boolean status = true;
 }

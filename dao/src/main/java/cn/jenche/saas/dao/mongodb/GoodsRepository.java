@@ -1,11 +1,10 @@
 /**
- * 
+ *
  */
 package cn.jenche.saas.dao.mongodb;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-
 import cn.jenche.saas.entity.GoodsEntity;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -14,5 +13,11 @@ import cn.jenche.saas.entity.GoodsEntity;
  * @Description: GoodsRepository
  */
 public interface GoodsRepository extends MongoRepository<GoodsEntity, String> {
-
+    /**
+     * 根据分类Id判断数据是否存在
+     *
+     * @param categoryId 分类Id
+     * @return {@link boolean}
+     */
+    boolean existsByCategoryId(String categoryId);
 }

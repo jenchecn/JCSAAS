@@ -18,11 +18,11 @@ import java.util.List;
 public class ClientVirtualAisleEntity extends BaseEntity {
     @Field(value = "client_id")
     @ApiModelProperty("终端Id")
-    private String ClientId;
+    private String clientId;
 
     @Field(value = "virtual_aisle_config_id")
     @ApiModelProperty("虚拟货道配置Id")
-    private String VirtualAisleConfigId;
+    private String virtualAisleConfigId;
     /**
      * 虚拟货道商品售价
      */

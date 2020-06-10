@@ -1,13 +1,16 @@
 package cn.jenche.saas.service.impl;
 
-import java.util.List;
-
+import cn.jenche.core.ExceptionMessage;
+import cn.jenche.core.SystemException;
+import cn.jenche.saas.entity.GoodsCategoryEntity;
+import cn.jenche.saas.service.IGoodsCategoryService;
+import cn.jenche.saas.service.IGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
-import cn.jenche.saas.entity.GoodsCategoryEntity;
-import cn.jenche.saas.service.IGoodsCategoryService;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -17,13 +20,35 @@ import cn.jenche.saas.service.IGoodsCategoryService;
  */
 @Service
 public class GoodsCategoryServiceImpl extends BaseServiceImpl<GoodsCategoryEntity> implements IGoodsCategoryService {
-	@Autowired
-	public GoodsCategoryServiceImpl(MongoRepository<GoodsCategoryEntity, String> repository) {
-		super(repository);
-	}
+    private final IGoodsService goodsService;
 
-	@Override
-	public List<GoodsCategoryEntity> LIST() {
-		return repository.findAll();
-	}
+    @Autowired
+    public GoodsCategoryServiceImpl(MongoRepository<GoodsCategoryEntity, String> repository, IGoodsService goodsService) {
+        super(repository);
+        this.goodsService = goodsService;
+    }
+
+    @Override
+    public void DELETE(Serializable... ids) throws SystemException {
+        if (ids != null && ids.length > 0) {
+            for (Serializable id : ids) {
+                String _id = String.valueOf(id);
+                if (goodsService.existsByCategoryId(_id)) {
+                    throw new SystemException(ExceptionMessage.S_20_DELETE_EXISTS_PART);
+                }
+
+                if (repository.existsById(_id)) {
+                    repository.deleteById(_id);
+                }
+            }
+            return;
+        }
+
+        throw new SystemException(ExceptionMessage.S_20_DELETE_ERROR);
+    }
+
+    @Override
+    public List<GoodsCategoryEntity> LIST() {
+        return repository.findAll();
+    }
 }

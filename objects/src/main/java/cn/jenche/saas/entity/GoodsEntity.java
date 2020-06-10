@@ -34,18 +34,18 @@ public class GoodsEntity extends BaseEntity {
     /**
      * 商品成本
      */
-    @Field(value = "cost")
+    @ApiModelProperty(value = "商品成本", example = "0.00")
     private double cost;
 
     /**
      * 原价
      */
-    @Field(value = "orig")
+    @ApiModelProperty(value = "商品原价", example = "0.00")
     private double orig;
 
     /**
      * 销售给顾客的价格
      */
-    @Field(value = "price")
+    @ApiModelProperty(value = "商品售价", example = "0.00")
     private double price;
 }

@@ -1,11 +1,11 @@
 /**
- * 
+ *
  */
 package cn.jenche.saas.service;
 
-import java.util.List;
-
 import cn.jenche.saas.entity.ClientPhysicsAisleEntity;
+
+import java.util.List;
 
 
 /**
@@ -15,12 +15,18 @@ import cn.jenche.saas.entity.ClientPhysicsAisleEntity;
  * @Description: 终端物理货道实体
  */
 public interface IClientPhysicsAisleService extends IBaseService<ClientPhysicsAisleEntity> {
-	/**
-	 * 获取list
-	 *
-	 * @return {@link List<ClientPhysicsAisleEntity>}
-	 */
-	List<ClientPhysicsAisleEntity> LIST();
+    /**
+     * 根据终端Id获取当前终端的货道
+     * @param clientId 终端Id
+     * @return {@link List<ClientPhysicsAisleEntity>} 列表
+     */
+    List<ClientPhysicsAisleEntity> FIND_BY_CLIENTID(String clientId);
 
-	ClientPhysicsAisleEntity ONE_BYCODE(String code);
+    /**
+     * 根据终端Id获取物理货道是否存在
+     *
+     * @param clientId 终端Id
+     * @return {@link Boolean}
+     */
+    boolean existsByClientId(String clientId);
 }
