@@ -4,7 +4,8 @@
 package cn.jenche.saas.service;
 
 import cn.jenche.core.SystemException;
-import cn.jenche.saas.dto.ClientPhysicsAisle.ClientPhysicsAisleDTO;
+import cn.jenche.saas.dto.clientphysicsaisle.ClientPhysicsAisleDTO;
+import cn.jenche.saas.dto.clientphysicsaisle.ClientPhysicsAisleExtGoodsDTO;
 import cn.jenche.saas.entity.ClientPhysicsAisleEntity;
 
 import java.util.List;
@@ -45,4 +46,11 @@ public interface IClientPhysicsAisleService extends IBaseService<ClientPhysicsAi
      * @return {@link List<ClientPhysicsAisleEntity>}
      */
     List<ClientPhysicsAisleEntity> UPDATE(ClientPhysicsAisleDTO clientPhysicsAisleDTO) throws SystemException;
+
+    /**
+     * 根据终端Id获取物理货道信息
+     * @param clientId 终端Id
+     * @return {@link List>}
+     */
+    List<ClientPhysicsAisleExtGoodsDTO> GET_DTO_BY_CLIENTID(String clientId) throws SystemException;
 }

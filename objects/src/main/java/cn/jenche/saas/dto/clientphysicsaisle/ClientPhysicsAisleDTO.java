@@ -1,4 +1,4 @@
-package cn.jenche.saas.dto.ClientPhysicsAisle;
+package cn.jenche.saas.dto.clientphysicsaisle;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

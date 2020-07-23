@@ -2,8 +2,8 @@ package cn.jenche.saas.api.controller;
 
 import cn.jenche.core.ResponseResult;
 import cn.jenche.core.SystemException;
-import cn.jenche.saas.dto.ClientPhysicsAisle.ClientPhysicsAisleDTO;
 import cn.jenche.saas.dto.ResponseResultDTO;
+import cn.jenche.saas.dto.clientphysicsaisle.ClientPhysicsAisleDTO;
 import cn.jenche.saas.entity.ClientPhysicsAisleEntity;
 import cn.jenche.saas.service.IClientPhysicsAisleService;
 import io.swagger.annotations.Api;
@@ -21,7 +21,7 @@ import java.util.List;
  * @Date: 2020年6月6日 上午11:30:06
  * @Description: 终端物理货道控制层
  */
-@Api(tags = "货道管理")
+@Api(tags = "终端物理货道设置")
 @RestController
 public class ClientPhysicsAisleController extends BaseController {
     private final IClientPhysicsAisleService clientPhysicsAisleService;

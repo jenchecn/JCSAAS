@@ -26,7 +26,7 @@ public class VirtualAisleConfigEntity extends BaseEntity {
      * 图片
      */
     @Field(value = "image")
-    @ApiModelProperty(value = "图片")
+    @ApiModelProperty(value = "前台展示的图片")
     private String image;
 
     /**

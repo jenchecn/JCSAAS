@@ -1,23 +1,23 @@
-package cn.jenche.saas.dto.ClientPhysicsAisle;
+package cn.jenche.saas.dto.clientphysicsaisle;
 
 import cn.jenche.saas.BaseEntity;
+import cn.jenche.saas.dto.GoodsDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
  * @Author: jenche <jenchecn@outlook.com>
- * @Date: 2020/7/23 12:01
+ * @Date: 2020/7/23 17:51
  * @Description:
  */
 @Data
-public class ClientPhysicsAisleExtDTO extends BaseEntity {
+public class ClientPhysicsAisleExtGoodsDTO extends BaseEntity {
+    @ApiModelProperty(value = "终端Id")
+    private String clientId;
+
     @ApiModelProperty("货道号码")
     private int aisleNumber;
-
-    @ApiModelProperty(value = "商品Id", required = true)
-    private String goodsId;
-
     /**
      * 折扣
      * <p>
@@ -41,4 +41,7 @@ public class ClientPhysicsAisleExtDTO extends BaseEntity {
      */
     @ApiModelProperty(value = "货道是否可用", example = "true")
     private boolean status = true;
+
+    @ApiModelProperty(value = "商品DTO")
+    private GoodsDTO goodsDTO;
 }

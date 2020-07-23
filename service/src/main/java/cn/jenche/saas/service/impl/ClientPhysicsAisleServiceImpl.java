@@ -4,16 +4,22 @@ package cn.jenche.saas.service.impl;
 import cn.jenche.core.ExceptionMessage;
 import cn.jenche.core.SystemException;
 import cn.jenche.saas.dao.mongodb.ClientPhysicsAisleRepository;
-import cn.jenche.saas.dto.ClientPhysicsAisle.ClientPhysicsAisleDTO;
-import cn.jenche.saas.dto.ClientPhysicsAisle.ClientPhysicsAisleExtDTO;
+import cn.jenche.saas.dto.GoodsDTO;
+import cn.jenche.saas.dto.clientphysicsaisle.ClientPhysicsAisleDTO;
+import cn.jenche.saas.dto.clientphysicsaisle.ClientPhysicsAisleExtDTO;
+import cn.jenche.saas.dto.clientphysicsaisle.ClientPhysicsAisleExtGoodsDTO;
 import cn.jenche.saas.entity.ClientPhysicsAisleEntity;
+import cn.jenche.saas.entity.GoodsEntity;
 import cn.jenche.saas.service.IClientPhysicsAisleService;
+import cn.jenche.saas.service.IGoodsService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -29,13 +35,15 @@ public class ClientPhysicsAisleServiceImpl
         implements IClientPhysicsAisleService {
 
     private final ClientPhysicsAisleRepository clientPhysicsAisleRepository;
+    private final IGoodsService goodsService;
 
     @Autowired
     public ClientPhysicsAisleServiceImpl(MongoRepository<ClientPhysicsAisleEntity, String> repository,
-                                         ClientPhysicsAisleRepository clientPhysicsAisleRepository) {
+                                         ClientPhysicsAisleRepository clientPhysicsAisleRepository, IGoodsService goodsService) {
         super(repository);
         this.clientPhysicsAisleRepository = clientPhysicsAisleRepository;
 
+        this.goodsService = goodsService;
     }
 
     @Override
@@ -99,6 +107,40 @@ public class ClientPhysicsAisleServiceImpl
         clientPhysicsAisleEntities = clientPhysicsAisleRepository.saveAll(clientPhysicsAisleEntities);
 
         return clientPhysicsAisleEntities;
+    }
+
+    @Override
+    public List<ClientPhysicsAisleExtGoodsDTO> GET_DTO_BY_CLIENTID(String clientId) throws SystemException {
+        List<ClientPhysicsAisleEntity> clientPhysicsAisleEntities = FIND_BY_CLIENTID(clientId);
+
+        List<ClientPhysicsAisleExtGoodsDTO> clientPhysicsAisleExtGoodsDTOS = new LinkedList<>();
+
+        for (ClientPhysicsAisleEntity entity : clientPhysicsAisleEntities) {
+            ClientPhysicsAisleExtGoodsDTO clientPhysicsAisleExtGoodsDTO = new ClientPhysicsAisleExtGoodsDTO();
+            clientPhysicsAisleExtGoodsDTO.setId(entity.getId());
+            clientPhysicsAisleExtGoodsDTO.setClientId(entity.getClientId());
+            clientPhysicsAisleExtGoodsDTO.setAisleNumber(entity.getAisleNumber()); //货道号码
+            clientPhysicsAisleExtGoodsDTO.setDiscount(entity.getDiscount());
+            clientPhysicsAisleExtGoodsDTO.setInventory(entity.getInventory());
+            clientPhysicsAisleExtGoodsDTO.setStatus(entity.isStatus());
+            String goodsId = entity.getGoodsId();
+            if (StringUtils.isBlank(goodsId)) {
+                throw new SystemException(ExceptionMessage.S_20_DATA_NOTEXISTS, "goodsId is null");
+            }
+
+            GoodsEntity goodsEntity = goodsService.ONE_BYID(goodsId);
+            clientPhysicsAisleExtGoodsDTO.setGoodsDTO(new GoodsDTO() {{
+                setId(goodsEntity.getId());
+                setName(goodsEntity.getName());
+                setCoverImage(goodsEntity.getCoverImage());
+                setOrig(goodsEntity.getOrig());
+                setPrice(goodsEntity.getPrice());
+            }});
+
+            clientPhysicsAisleExtGoodsDTOS.add(clientPhysicsAisleExtGoodsDTO);
+        }
+
+        return clientPhysicsAisleExtGoodsDTOS;
     }
 
     private boolean existsByAisleNumberAndClientIdAndIdNot(int aisleNumber, String clientId, String id) {

@@ -5,11 +5,12 @@ import cn.jenche.core.Pager;
 import cn.jenche.core.SystemException;
 import cn.jenche.saas.dao.mongodb.ClientRepository;
 import cn.jenche.saas.dto.ClientDTO;
-import cn.jenche.saas.dto.ClientPhysicsAisle.ClientPhysicsAisleDTO;
-import cn.jenche.saas.dto.ClientVirtualAisleDTO;
+import cn.jenche.saas.dto.clientphysicsaisle.ClientPhysicsAisleExtGoodsDTO;
+import cn.jenche.saas.dto.clientvirtualaisle.ClientVirtualAisleDTO;
 import cn.jenche.saas.entity.ClientCategoryEntity;
 import cn.jenche.saas.entity.ClientEntity;
 import cn.jenche.saas.service.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -25,6 +26,7 @@ import java.util.List;
  * @Date: 2020/4/20 17:46
  * @Description: 终端实体
  */
+@Slf4j
 @Service
 public class ClientServiceImpl extends BaseServiceImpl<ClientEntity> implements IClientService {
     private final IClientPhysicsAisleService clientPhysicsAisleService;
@@ -53,15 +55,19 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientEntity> implements 
         for (ClientEntity entity : list) {
             // 查找到终端分类
             ClientCategoryEntity clientCategoryEntity = clientCategoryService.findByIdWithEntitys(clientCategoryEntities, entity.getClientCategoryId());
+            List<ClientVirtualAisleDTO> clientVirtualAisleDTOS = null; //虚拟货道配置
+            List<ClientPhysicsAisleExtGoodsDTO> clientPhysicsAisleExtGoodsDTOS = null; //物理货道信息
 
             //如果启用了虚拟货道
             if (entity.isEnableVirtualAisle()) {
                 // 虚拟货道信息
-                List<ClientVirtualAisleDTO> clientVirtualAisleDTOS = null;
+                clientVirtualAisleDTOS = clientVirtualAisleService.GET_DTO_BY_CLIENTID(entity.getId());
             } else {
                 // 物理货道信息
-                List<ClientPhysicsAisleDTO> clientPhysicsAisleDTOS = null;
+                clientPhysicsAisleExtGoodsDTOS = clientPhysicsAisleService.GET_DTO_BY_CLIENTID(entity.getId());
             }
+            
+
         }
 
         return null;

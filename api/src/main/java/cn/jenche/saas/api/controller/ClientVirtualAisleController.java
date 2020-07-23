@@ -5,8 +5,8 @@ package cn.jenche.saas.api.controller;
 
 import cn.jenche.core.ResponseResult;
 import cn.jenche.core.SystemException;
-import cn.jenche.saas.dto.ClientVirtualAisleDTO;
 import cn.jenche.saas.dto.ResponseResultDTO;
+import cn.jenche.saas.dto.clientvirtualaisle.ClientVirtualAisleDTO;
 import cn.jenche.saas.entity.ClientVirtualAisleEntity;
 import cn.jenche.saas.service.IClientVirtualAisleService;
 import io.swagger.annotations.Api;
@@ -24,7 +24,7 @@ import java.util.List;
  * @Date: 2020年6月6日 下午2:38:47
  * @Description: 终端虚拟货道控制层
  */
-@Api(tags = "货道管理")
+@Api(tags = "终端虚拟货道设置")
 @RestController
 public class ClientVirtualAisleController extends BaseController {
     private final IClientVirtualAisleService clientVirtualAisleService;
