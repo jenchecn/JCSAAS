@@ -13,10 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -49,7 +46,7 @@ public class AdminController extends BaseController {
     }
 
     @ApiOperation("根据ID获取用户")
-    @PostMapping(value = "/admin/{id}")
+    @GetMapping(value = "/admin/{id}")
     public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
         AdminEntity entity = adminService.ONE_BYID(id);
         return new ResponseResult<>(entity).send();
@@ -57,13 +54,13 @@ public class AdminController extends BaseController {
 
     @ApiOperation("管理员添加")
     @PostMapping(value = "/admin/save")
-    public ResponseResultDTO save(@Valid AdminDTO adminDTO, BindingResult bindingResult) throws SystemException {
+    public ResponseResultDTO save(@RequestBody @Valid AdminDTO adminDTO, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<>(bindingResult, () -> adminService.SAVE(adminDTO)).send();
     }
 
     @ApiOperation("管理员修改")
     @PostMapping(value = "/admin/update")
-    public ResponseResultDTO update(@Valid AdminDTO adminDTO, BindingResult bindingResult) throws SystemException {
+    public ResponseResultDTO update(@RequestBody @Valid AdminDTO adminDTO, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<>(bindingResult, () -> adminService.UPDATE(adminDTO)).send();
 
     }

@@ -4,6 +4,7 @@ import cn.jenche.core.Pager;
 import cn.jenche.core.SystemException;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -56,4 +57,11 @@ public interface IBaseService<E> {
      * @throws SystemException 系统自定义异常
      */
     void DELETE(Serializable... ids) throws SystemException;
+
+    /**
+     * 获取全部
+     *
+     * @return {@link List}
+     */
+    List<E> FINDALL();
 }

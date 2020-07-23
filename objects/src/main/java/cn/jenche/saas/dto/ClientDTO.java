@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cn.jenche.saas.dto;
 
 import cn.jenche.saas.entity.ClientEntity;
@@ -16,5 +13,5 @@ import lombok.Data;
 @Data
 @ApiModel(value = "终端实体")
 public class ClientDTO extends ClientEntity {
-
+    
 }

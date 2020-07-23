@@ -12,5 +12,8 @@ import java.util.ResourceBundle;
  */
 public class SystemConfig {
     //语言包的系统常量
-    public static final Map<String, ResourceBundle> LangMessage = new HashMap<>();
+    public static final Map<String, ResourceBundle> LANG_MESSAGE = new HashMap<>();
+
+    //全局机器编码开始码
+    public static final String FIST_CODE = "810";
 }

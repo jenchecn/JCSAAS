@@ -13,9 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -37,7 +35,7 @@ public class ClientVirtualAisleController extends BaseController {
     }
 
     @ApiOperation("根据终端Id获取虚拟货道")
-    @PostMapping(value = "/client/aisle/virtual/{clientId}")
+    @GetMapping(value = "/client/aisle/virtual/{clientId}")
     public ResponseResultDTO byCode(@PathVariable(value = "clientId") String clientId) throws SystemException {
         List<ClientVirtualAisleEntity> list = clientVirtualAisleService.FIND_BY_CLIENTID(clientId);
         return new ResponseResult<>(list).send();
@@ -45,14 +43,14 @@ public class ClientVirtualAisleController extends BaseController {
 
     @ApiOperation("虚拟货道添加")
     @PostMapping(value = "/client/aisle/virtual/save")
-    public ResponseResultDTO save(@Valid ClientVirtualAisleDTO clientVirtualAisleDTO, BindingResult bindingResult)
+    public ResponseResultDTO save(@RequestBody @Valid ClientVirtualAisleDTO clientVirtualAisleDTO, BindingResult bindingResult)
             throws SystemException {
         return new ResponseResult<>(bindingResult, () -> clientVirtualAisleService.SAVE(clientVirtualAisleDTO)).send();
     }
 
     @ApiOperation("虚拟货道修改")
     @PostMapping(value = "/client/aisle/virtual/update")
-    public ResponseResultDTO update(@Valid ClientVirtualAisleDTO clientVirtualAisleDTO, BindingResult bindingResult)
+    public ResponseResultDTO update(@RequestBody @Valid ClientVirtualAisleDTO clientVirtualAisleDTO, BindingResult bindingResult)
             throws SystemException {
         return new ResponseResult<>(bindingResult, () -> clientVirtualAisleService.UPDATE(clientVirtualAisleDTO)).send();
 

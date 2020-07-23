@@ -1,6 +1,6 @@
 package cn.jenche.saas.entity.location;
 
-import cn.jenche.saas.entity.BaseEntity;
+import cn.jenche.saas.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

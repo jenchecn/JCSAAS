@@ -1,6 +1,6 @@
 package cn.jenche.saas.entity.location;
 
-import cn.jenche.saas.entity.BaseEntity;
+import cn.jenche.saas.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;

@@ -46,7 +46,7 @@ public class ConsignerController extends BaseController {
     }
 
     @ApiOperation("根据ID获取数据")
-    @PostMapping("/consigner/{id}")
+    @GetMapping("/consigner/{id}")
     public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
         ConsignerEntity entity = consignerService.ONE_BYID(id);
         return new ResponseResult<>(entity).send();
@@ -54,7 +54,7 @@ public class ConsignerController extends BaseController {
 
     @ApiOperation("保存")
     @PostMapping("/consigner/save")
-    public ResponseResultDTO save(@Valid ConsignerDTO dto, BindingResult bindingResult) throws SystemException {
+    public ResponseResultDTO save(@RequestBody @Valid ConsignerDTO dto, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<>(
                 bindingResult,
                 () -> consignerService.SAVE(dto)
@@ -62,7 +62,7 @@ public class ConsignerController extends BaseController {
     }
 
     @ApiOperation("删除")
-    @GetMapping("/consigner/{id}")
+    @PostMapping("/consigner/{id}")
     public ResponseResultDTO delete(@PathVariable(value = "id") String id) throws SystemException {
         consignerService.DELETE(id);
         return new ResponseResult<ClientCategoryEntity>().succeed().send();
@@ -70,7 +70,7 @@ public class ConsignerController extends BaseController {
 
     @ApiOperation("更新")
     @PostMapping("/consigner/udpate")
-    public ResponseResultDTO update(@Valid ConsignerDTO dto, BindingResult bindingResult) throws SystemException {
+    public ResponseResultDTO update(@RequestBody @Valid ConsignerDTO dto, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<>(
                 bindingResult,
                 () -> consignerService.UPDATE(dto)

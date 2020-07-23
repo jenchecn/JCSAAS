@@ -26,15 +26,15 @@ public class LocalI18nResources {
     public String getMessage(String key, Object... params) {
         //Locale locale = LocaleContextHolder.getLocale(); //根据环境获取
         Locale locale = Locale.SIMPLIFIED_CHINESE;
-        ResourceBundle message = SystemConfig.LangMessage.get(locale.getLanguage());
+        ResourceBundle message = SystemConfig.LANG_MESSAGE.get(locale.getLanguage());
         if (message == null) {
-            synchronized (SystemConfig.LangMessage) {
+            synchronized (SystemConfig.LANG_MESSAGE) {
                 //在这里读取配置信息
-                message = SystemConfig.LangMessage.get(locale.getLanguage());
+                message = SystemConfig.LANG_MESSAGE.get(locale.getLanguage());
                 if (message == null) {
                     //注1
                     message = ResourceBundle.getBundle("i18n/messages", locale);
-                    SystemConfig.LangMessage.put(locale.getLanguage(), message);
+                    SystemConfig.LANG_MESSAGE.put(locale.getLanguage(), message);
                 }
             }
         }
@@ -55,6 +55,6 @@ public class LocalI18nResources {
      * 清除国际化信息
      */
     public void flushMessage() {
-        SystemConfig.LangMessage.clear();
+        SystemConfig.LANG_MESSAGE.clear();
     }
 }

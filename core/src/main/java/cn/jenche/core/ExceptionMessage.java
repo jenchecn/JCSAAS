@@ -13,15 +13,18 @@ public enum ExceptionMessage {
     //10 发生在Dao层，一般为数据库操作出现的异常
 
     //20 发生在service层，一般为业务逻辑出现的异常
-    S_20_NOT_IMPLEMENT(20, "0000"),
-    S_20_DATA_NOTEXISTS(20, "0001"),
-    S_20_DELETE_ERROR(20, "0002"),
-    S_20_FINDFIELD_ERROR(20, "0003"),
-    S_20_DATA_EXISTS(20, "0004"), //数据已经存在
+    S_20_NOT_IMPLEMENT(20, "0000"),     //未知的错误
+    S_20_DATA_NOTEXISTS(20, "0001"),    //数据不存在
+    S_20_DELETE_ERROR(20, "0002"),      //删除数据出错
+    S_20_FINDFIELD_ERROR(20, "0003"),   //
+    S_20_DATA_EXISTS(20, "0004"),       //数据已经存在
     S_20_DELETE_EXISTS_PART(20, "0005"), //存在子数据不允许删除
+    S_20_NOTEXISTS_ID(20, "0006"),       //Id不存在 ---所以不能更新数据，常规使用在更新上
+    S_20_UPDATE_ERROR(20, "0007"),        //更新出错，这可能是新数据与旧数据冲突或者更新的Id不存在
+
     //50 发生在Controller层，一般为数据的DTO传输层，一般为数据的校验或者传输的参数异常
-    C_50_DATA_IS_EMPTY(50, "0001"), //返回的数据为空
-    C_50_PARAMS_EXCPTION(50, "0009"), //参数异常
+    C_50_DATA_IS_EMPTY(50, "0001"),      //返回的数据为空
+    C_50_PARAMS_EXCPTION(50, "0009"),    //参数异常
 
     ;
 

@@ -26,4 +26,12 @@ public interface ClientRepository extends MongoRepository<ClientEntity, String> 
      * @return {@link Boolean}
      */
     boolean existsByClientCategoryId(String categoryId);
+
+    /**
+     * 根据Imei查找一条终端数据
+     *
+     * @param iMei 终端IMei
+     * @return {@link ClientEntity}
+     */
+    ClientEntity findByiMei(String iMei);
 }

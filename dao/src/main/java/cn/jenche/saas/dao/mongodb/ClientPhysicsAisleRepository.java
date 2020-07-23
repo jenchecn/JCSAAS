@@ -27,4 +27,16 @@ public interface ClientPhysicsAisleRepository extends MongoRepository<ClientPhys
      * @return {@link Boolean}
      */
     boolean existsByClientId(String clientId);
+
+
+    /**
+     * 根据货道号码和终端Id判断数据是否存在
+     *
+     * @param aisleNumber 货道号码
+     * @param clientId    终端Id
+     * @return {@link boolean}
+     */
+    boolean existsByAisleNumberAndClientId(int aisleNumber, String clientId);
+
+    boolean existsByAisleNumberAndClientIdAndIdNot(int aisleNumber, String clientId, String id);
 }

@@ -1,22 +1,29 @@
 package cn.jenche.saas.service.impl;
 
 import cn.jenche.core.ExceptionMessage;
+import cn.jenche.core.Pager;
 import cn.jenche.core.SystemException;
 import cn.jenche.saas.dao.mongodb.ClientRepository;
+import cn.jenche.saas.dto.ClientDTO;
+import cn.jenche.saas.dto.ClientPhysicsAisle.ClientPhysicsAisleDTO;
+import cn.jenche.saas.dto.ClientVirtualAisleDTO;
+import cn.jenche.saas.entity.ClientCategoryEntity;
 import cn.jenche.saas.entity.ClientEntity;
-import cn.jenche.saas.service.IClientPhysicsAisleService;
-import cn.jenche.saas.service.IClientService;
-import cn.jenche.saas.service.IClientVirtualAisleService;
+import cn.jenche.saas.service.*;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Page;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
  * @Author: jenche <jenchecn@outlook.com>
  * @Date: 2020/4/20 17:46
- * @Description:终端实体
+ * @Description: 终端实体
  */
 @Service
 public class ClientServiceImpl extends BaseServiceImpl<ClientEntity> implements IClientService {
@@ -24,12 +31,40 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientEntity> implements 
     private final IClientVirtualAisleService clientVirtualAisleService;
     private final ClientRepository clientRepository;
 
-    public ClientServiceImpl(MongoRepository<ClientEntity, String> repository, IClientPhysicsAisleService clientPhysicsAisleService, IClientVirtualAisleService clientVirtualAisleService, ClientRepository clientRepository) {
+    private final IClientCategoryService clientCategoryService;
+
+    public ClientServiceImpl(MongoRepository<ClientEntity, String> repository, IClientPhysicsAisleService clientPhysicsAisleService, IClientVirtualAisleService clientVirtualAisleService, ClientRepository clientRepository, IProvinceService provinceService, ICityService cityService, IDistrictService districtService, IClientCategoryService clientCategoryService) {
         super(repository);
         this.clientPhysicsAisleService = clientPhysicsAisleService;
         this.clientVirtualAisleService = clientVirtualAisleService;
         this.clientRepository = clientRepository;
 
+        this.clientCategoryService = clientCategoryService;
+    }
+
+    @Override
+    public Pager<ClientEntity> LIST_PAGES(Pager<ClientEntity> pager) throws SystemException {
+        Page<ClientEntity> clientList = clientRepository.findAll(pager.getPageable());
+        List<ClientEntity> list = new LinkedList<>(clientList.getContent());
+        List<ClientDTO> clientDTOList = new LinkedList<>();
+
+        List<ClientCategoryEntity> clientCategoryEntities = clientCategoryService.FINDALL();
+
+        for (ClientEntity entity : list) {
+            // 查找到终端分类
+            ClientCategoryEntity clientCategoryEntity = clientCategoryService.findByIdWithEntitys(clientCategoryEntities, entity.getClientCategoryId());
+
+            //如果启用了虚拟货道
+            if (entity.isEnableVirtualAisle()) {
+                // 虚拟货道信息
+                List<ClientVirtualAisleDTO> clientVirtualAisleDTOS = null;
+            } else {
+                // 物理货道信息
+                List<ClientPhysicsAisleDTO> clientPhysicsAisleDTOS = null;
+            }
+        }
+
+        return null;
     }
 
     @Override
@@ -40,6 +75,36 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientEntity> implements 
     @Override
     public boolean existsByCategoryId(String categoryId) {
         return clientRepository.existsByClientCategoryId(categoryId);
+    }
+
+    @Override
+    public ClientEntity SAVE(ClientEntity entity) throws SystemException {
+        if (ONE_BYCODE(entity.getCode()) != null || oneByImei(entity.getIMei()) != null) {
+            throw new SystemException(ExceptionMessage.S_20_DATA_EXISTS);
+        }
+        return clientRepository.save(entity);
+    }
+
+    @Override
+    public ClientEntity UPDATE(ClientEntity entity) throws SystemException {
+        if (StringUtils.isBlank(entity.getId())) {
+            throw new SystemException(ExceptionMessage.S_20_DATA_NOTEXISTS);
+        }
+
+        return SAVE(entity);
+    }
+
+    /**
+     * 根据Imei返回数据
+     * <p>
+     * 私有方法只在当前类中使用
+     * </p>
+     *
+     * @param iMei 终端的Imei
+     * @return {@link ClientEntity}
+     */
+    private ClientEntity oneByImei(String iMei) {
+        return clientRepository.findByiMei(iMei);
     }
 
     @Override

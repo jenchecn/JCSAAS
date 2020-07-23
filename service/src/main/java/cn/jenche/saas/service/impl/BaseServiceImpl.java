@@ -8,6 +8,7 @@ import cn.jenche.utility.GenericsUtility;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -64,7 +65,12 @@ public abstract class BaseServiceImpl<E> implements IBaseService<E> {
             }
             return;
         }
-        
+
         throw new SystemException(ExceptionMessage.S_20_DELETE_ERROR);
+    }
+
+    @Override
+    public List<E> FINDALL() {
+        return repository.findAll();
     }
 }

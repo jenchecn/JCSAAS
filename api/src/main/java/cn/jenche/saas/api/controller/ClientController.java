@@ -43,7 +43,7 @@ public class ClientController extends BaseController {
     }
 
     @ApiOperation("根据code获取数据")
-    @PostMapping(value = "/client/{code}")
+    @GetMapping(value = "/client/{code}")
     public ResponseResultDTO byCode(@PathVariable(value = "code") String code) throws SystemException {
         ClientEntity entity = clientService.ONE_BYCODE(code);
         return new ResponseResult<>(entity).send();
@@ -51,13 +51,13 @@ public class ClientController extends BaseController {
 
     @ApiOperation("终端保存")
     @PostMapping(value = "/client/save")
-    public ResponseResultDTO save(@Valid ClientDTO clientDTO, BindingResult bindingResult) throws SystemException {
+    public ResponseResultDTO save(@RequestBody @Valid ClientDTO clientDTO, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<ClientEntity>(bindingResult, () -> clientService.SAVE(clientDTO)).send();
     }
 
     @ApiOperation("终端修改")
     @PostMapping(value = "/client/update")
-    public ResponseResultDTO update(@Valid ClientDTO clientDTO, BindingResult bindingResult) throws SystemException {
+    public ResponseResultDTO update(@RequestBody @Valid ClientDTO clientDTO, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<ClientEntity>(bindingResult, () -> clientService.UPDATE(clientDTO)).send();
     }
 

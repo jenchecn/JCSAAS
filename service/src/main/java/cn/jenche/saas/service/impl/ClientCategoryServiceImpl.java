@@ -6,10 +6,12 @@ import cn.jenche.saas.dao.mongodb.ClientCategoryRepository;
 import cn.jenche.saas.entity.ClientCategoryEntity;
 import cn.jenche.saas.service.IClientCategoryService;
 import cn.jenche.saas.service.IClientService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -20,12 +22,21 @@ import java.io.Serializable;
 
 @Service
 public class ClientCategoryServiceImpl extends BaseServiceImpl<ClientCategoryEntity> implements IClientCategoryService {
-    private final IClientService clientService;
+    private IClientService clientService;
+
+
+    public IClientService getClientService() {
+        return clientService;
+    }
 
     @Autowired
-    public ClientCategoryServiceImpl(ClientCategoryRepository clientCategoryRepository, IClientService clientService) {
-        super(clientCategoryRepository);
+    public void setClientService(IClientService clientService) {
         this.clientService = clientService;
+    }
+
+    @Autowired
+    public ClientCategoryServiceImpl(ClientCategoryRepository clientCategoryRepository) {
+        super(clientCategoryRepository);
     }
 
     @Override
@@ -45,5 +56,15 @@ public class ClientCategoryServiceImpl extends BaseServiceImpl<ClientCategoryEnt
         }
 
         throw new SystemException(ExceptionMessage.S_20_DELETE_ERROR);
+    }
+
+    @Override
+    public ClientCategoryEntity findByIdWithEntitys(List<ClientCategoryEntity> entities, String id) {
+        for (ClientCategoryEntity categoryEntity : entities) {
+            if (StringUtils.equals(id, categoryEntity.getId())) {
+                return categoryEntity;
+            }
+        }
+        return null;
     }
 }

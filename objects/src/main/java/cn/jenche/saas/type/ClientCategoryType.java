@@ -10,17 +10,17 @@ import lombok.Getter;
  */
 
 public enum ClientCategoryType {
-    V1(10, "普通槟榔机"),
-    V2(20, "冷藏槟榔机");
+    V1("1", "普通槟榔机"),
+    V2("2", "冷藏槟榔机");
 
     @Getter
-    private final int code;
+    private final String code;
 
     @Getter
-    private final String name;
+    private final String desc;
 
-    ClientCategoryType(int code, String name) {
+    ClientCategoryType(String code, String desc) {
         this.code = code;
-        this.name = name;
+        this.desc = desc;
     }
 }

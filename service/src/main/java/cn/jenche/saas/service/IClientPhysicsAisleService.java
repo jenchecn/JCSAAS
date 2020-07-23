@@ -3,6 +3,8 @@
  */
 package cn.jenche.saas.service;
 
+import cn.jenche.core.SystemException;
+import cn.jenche.saas.dto.ClientPhysicsAisle.ClientPhysicsAisleDTO;
 import cn.jenche.saas.entity.ClientPhysicsAisleEntity;
 
 import java.util.List;
@@ -29,4 +31,18 @@ public interface IClientPhysicsAisleService extends IBaseService<ClientPhysicsAi
      * @return {@link Boolean}
      */
     boolean existsByClientId(String clientId);
+
+    /**
+     * 保存货道
+     * @param clientPhysicsAisleDTO 终端物理货道DTO
+     * @return {@link List<ClientPhysicsAisleEntity>}
+     */
+    List<ClientPhysicsAisleEntity> SAVE(ClientPhysicsAisleDTO clientPhysicsAisleDTO) throws SystemException;
+
+    /**
+     * 更新货道
+     * @param clientPhysicsAisleDTO 终端物理货道DTO
+     * @return {@link List<ClientPhysicsAisleEntity>}
+     */
+    List<ClientPhysicsAisleEntity> UPDATE(ClientPhysicsAisleDTO clientPhysicsAisleDTO) throws SystemException;
 }

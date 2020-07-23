@@ -1,4 +1,4 @@
-package cn.jenche.saas.entity;
+package cn.jenche.saas;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,14 +19,14 @@ import java.util.Date;
 @Data
 public class BaseEntity implements Serializable {
     @Id
-    @ApiModelProperty(value = "id")
+    @ApiModelProperty(value = "Id, 新建时不需要传此字段")
     private String id;
 
     @Field(value = "create_date")
-    @ApiModelProperty(value = "创建时间，默认不传此参数自动生成当前系统时间")
+    @ApiModelProperty(value = "创建时间，不传此参数自动生成当前系统时间")
     private Date createDate = new Date();
 
     @Field(value = "modify_date")
-    @ApiModelProperty(value = "修改时间，默认不传此参数自动生成当前系统时间")
+    @ApiModelProperty(value = "修改时间，不传此参数自动生成当前系统时间")
     private Date modifyDate = new Date();
 }

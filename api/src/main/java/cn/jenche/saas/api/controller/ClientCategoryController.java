@@ -4,6 +4,7 @@ import cn.jenche.core.Pager;
 import cn.jenche.core.ResponseResult;
 import cn.jenche.core.SystemException;
 import cn.jenche.saas.dto.ClientCategoryDTO;
+import cn.jenche.saas.dto.ClientCategoryTypeDTO;
 import cn.jenche.saas.dto.PagerDTO;
 import cn.jenche.saas.dto.ResponseResultDTO;
 import cn.jenche.saas.entity.ClientCategoryEntity;
@@ -17,9 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Copyright Copyright (c) 2020 By www.jenche.cn
@@ -50,7 +49,7 @@ public class ClientCategoryController extends BaseController {
     }
 
     @ApiOperation("根据ID获取数据")
-    @PostMapping(value = "/client/category/{id}")
+    @GetMapping(value = "/client/category/{id}")
     public ResponseResultDTO byId(@PathVariable(value = "id") String id) throws SystemException {
         ClientCategoryEntity entity = clientCategoryService.ONE_BYID(id);
         return new ResponseResult<>(entity).send();
@@ -58,7 +57,7 @@ public class ClientCategoryController extends BaseController {
 
     @ApiOperation("新增")
     @PostMapping(value = "/client/category/save")
-    public ResponseResultDTO save(@Valid ClientCategoryDTO clientCategoryDTO, BindingResult bindingResult) throws SystemException {
+    public ResponseResultDTO save(@RequestBody @Valid ClientCategoryDTO clientCategoryDTO, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<ClientCategoryEntity>(
                 bindingResult,
                 () -> clientCategoryService.SAVE(clientCategoryDTO)
@@ -67,7 +66,7 @@ public class ClientCategoryController extends BaseController {
 
     @ApiOperation("修改")
     @PostMapping(value = "/client/category/update")
-    public ResponseResultDTO update(@Valid ClientCategoryDTO clientCategoryDTO, BindingResult bindingResult) throws SystemException {
+    public ResponseResultDTO update(@RequestBody @Valid ClientCategoryDTO clientCategoryDTO, BindingResult bindingResult) throws SystemException {
         return new ResponseResult<ClientCategoryEntity>(
                 bindingResult,
                 () -> clientCategoryService.UPDATE(clientCategoryDTO)
@@ -84,11 +83,14 @@ public class ClientCategoryController extends BaseController {
     @ApiOperation("类型")
     @PostMapping(value = "/client/category/type")
     public ResponseResultDTO type() throws SystemException {
-        List<Map<String, Object>> list = new ArrayList<>();
+        List<ClientCategoryTypeDTO> list = new ArrayList<>();
         for (ClientCategoryType value : ClientCategoryType.values()) {
-            Map<String, Object> map = new LinkedHashMap<>();
-            map.put(value.name(), value.getName());
-            list.add(map);
+            ClientCategoryTypeDTO clientCategoryTypeDTO = new ClientCategoryTypeDTO() {{
+                setName(value.name());
+                setCode(value.getCode());
+                setDesc(value.getDesc());
+            }};
+            list.add(clientCategoryTypeDTO);
         }
         return new ResponseResult<>(list).send();
     }
