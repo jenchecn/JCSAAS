@@ -1,7 +1,7 @@
 package cn.jenche.saas.service;
 
 import cn.jenche.core.SystemException;
-import cn.jenche.saas.dto.clientvirtualaisle.ClientVirtualAisleDTO;
+import cn.jenche.saas.dto.clientvirtualaisle.ClientVirtualAisleResponseDTO;
 import cn.jenche.saas.entity.ClientVirtualAisleEntity;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public interface IClientVirtualAisleService extends IBaseService<ClientVirtualAi
      * 根据终端Id获取DTO数据
      *
      * @param clientId 终端Id
-     * @return {@link List<ClientVirtualAisleDTO>}
+     * @return {@link List< ClientVirtualAisleResponseDTO >}
      */
-    List<ClientVirtualAisleDTO> GET_DTO_BY_CLIENTID(String clientId) throws SystemException;
+    List<ClientVirtualAisleResponseDTO> GET_DTO_BY_CLIENTID(String clientId) throws SystemException;
 }

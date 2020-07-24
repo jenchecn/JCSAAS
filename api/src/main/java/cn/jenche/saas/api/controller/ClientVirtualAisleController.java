@@ -6,7 +6,8 @@ package cn.jenche.saas.api.controller;
 import cn.jenche.core.ResponseResult;
 import cn.jenche.core.SystemException;
 import cn.jenche.saas.dto.ResponseResultDTO;
-import cn.jenche.saas.dto.clientvirtualaisle.ClientVirtualAisleDTO;
+import cn.jenche.saas.dto.clientvirtualaisle.ClientVirtualAisleRequestDTO;
+import cn.jenche.saas.dto.clientvirtualaisle.ClientVirtualAisleResponseDTO;
 import cn.jenche.saas.entity.ClientVirtualAisleEntity;
 import cn.jenche.saas.service.IClientVirtualAisleService;
 import io.swagger.annotations.Api;
@@ -43,16 +44,16 @@ public class ClientVirtualAisleController extends BaseController {
 
     @ApiOperation("虚拟货道添加")
     @PostMapping(value = "/client/aisle/virtual/save")
-    public ResponseResultDTO save(@RequestBody @Valid ClientVirtualAisleDTO clientVirtualAisleDTO, BindingResult bindingResult)
+    public ResponseResultDTO save(@RequestBody @Valid ClientVirtualAisleRequestDTO clientVirtualAisleRequestDTO, BindingResult bindingResult)
             throws SystemException {
-        return new ResponseResult<>(bindingResult, () -> clientVirtualAisleService.SAVE(clientVirtualAisleDTO)).send();
+        return new ResponseResult<>(bindingResult, () -> clientVirtualAisleService.SAVE(clientVirtualAisleRequestDTO)).send();
     }
 
     @ApiOperation("虚拟货道修改")
     @PostMapping(value = "/client/aisle/virtual/update")
-    public ResponseResultDTO update(@RequestBody @Valid ClientVirtualAisleDTO clientVirtualAisleDTO, BindingResult bindingResult)
+    public ResponseResultDTO update(@RequestBody @Valid ClientVirtualAisleResponseDTO clientVirtualAisleResponseDTO, BindingResult bindingResult)
             throws SystemException {
-        return new ResponseResult<>(bindingResult, () -> clientVirtualAisleService.UPDATE(clientVirtualAisleDTO)).send();
+        return new ResponseResult<>(bindingResult, () -> clientVirtualAisleService.UPDATE(clientVirtualAisleResponseDTO)).send();
 
     }
 

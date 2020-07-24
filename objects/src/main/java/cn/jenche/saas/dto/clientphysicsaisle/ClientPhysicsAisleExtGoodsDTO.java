@@ -2,6 +2,7 @@ package cn.jenche.saas.dto.clientphysicsaisle;
 
 import cn.jenche.saas.BaseEntity;
 import cn.jenche.saas.dto.GoodsDTO;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -12,6 +13,7 @@ import lombok.Data;
  * @Description:
  */
 @Data
+@ApiModel(value = "物理货道扩展商品DTO")
 public class ClientPhysicsAisleExtGoodsDTO extends BaseEntity {
     @ApiModelProperty(value = "终端Id")
     private String clientId;

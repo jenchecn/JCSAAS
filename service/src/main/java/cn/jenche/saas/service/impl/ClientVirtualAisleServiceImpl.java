@@ -3,7 +3,7 @@ package cn.jenche.saas.service.impl;
 import cn.jenche.core.ExceptionMessage;
 import cn.jenche.core.SystemException;
 import cn.jenche.saas.dao.mongodb.ClientVirtualAisleRepository;
-import cn.jenche.saas.dto.clientvirtualaisle.ClientVirtualAisleDTO;
+import cn.jenche.saas.dto.clientvirtualaisle.ClientVirtualAisleResponseDTO;
 import cn.jenche.saas.entity.ClientVirtualAisleEntity;
 import cn.jenche.saas.entity.VirtualAisleConfigEntity;
 import cn.jenche.saas.service.IClientVirtualAisleService;
@@ -48,9 +48,9 @@ public class ClientVirtualAisleServiceImpl extends BaseServiceImpl<ClientVirtual
     }
 
     @Override
-    public List<ClientVirtualAisleDTO> GET_DTO_BY_CLIENTID(String clientId) throws SystemException {
+    public List<ClientVirtualAisleResponseDTO> GET_DTO_BY_CLIENTID(String clientId) throws SystemException {
         List<ClientVirtualAisleEntity> clientVirtualAisleEntities = FIND_BY_CLIENTID(clientId);
-        List<ClientVirtualAisleDTO> clientVirtualAisleDTOS = new LinkedList<>();
+        List<ClientVirtualAisleResponseDTO> clientVirtualAisleResponseDTOS = new LinkedList<>();
 
         for (ClientVirtualAisleEntity clientVirtualAisleEntity : clientVirtualAisleEntities) {
             //获取虚拟货道配置信息
@@ -59,13 +59,16 @@ public class ClientVirtualAisleServiceImpl extends BaseServiceImpl<ClientVirtual
                 throw new SystemException(ExceptionMessage.S_20_DATA_NOTEXISTS);
             }
 
-            ClientVirtualAisleDTO clientVirtualAisleDTO = new ClientVirtualAisleDTO();
-            clientVirtualAisleDTO.setName(virtualAisleConfigEntity.getName());
-            clientVirtualAisleDTO.setDesc(virtualAisleConfigEntity.getDesc());
-            clientVirtualAisleDTO.setImage(virtualAisleConfigEntity.getImage());
-            clientVirtualAisleDTO.setSellPrice(clientVirtualAisleEntity.getSellPrice());
-            clientVirtualAisleDTOS.add(clientVirtualAisleDTO);
+            ClientVirtualAisleResponseDTO clientVirtualAisleResponseDTO = new ClientVirtualAisleResponseDTO();
+            clientVirtualAisleResponseDTO.setId(clientVirtualAisleEntity.getId());
+            clientVirtualAisleResponseDTO.setName(virtualAisleConfigEntity.getName());
+            clientVirtualAisleResponseDTO.setDesc(virtualAisleConfigEntity.getDesc());
+            clientVirtualAisleResponseDTO.setImage(virtualAisleConfigEntity.getImage());
+            clientVirtualAisleResponseDTO.setSellPrice(clientVirtualAisleEntity.getSellPrice());
+            clientVirtualAisleResponseDTO.setCreateDate(null);
+            clientVirtualAisleResponseDTO.setModifyDate(null);
+            clientVirtualAisleResponseDTOS.add(clientVirtualAisleResponseDTO);
         }
-        return clientVirtualAisleDTOS;
+        return clientVirtualAisleResponseDTOS;
     }
 }

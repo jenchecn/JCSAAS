@@ -5,7 +5,7 @@ import cn.jenche.core.SystemException;
 import cn.jenche.saas.dao.mongodb.ClientRepository;
 import cn.jenche.saas.dto.ClientDTO;
 import cn.jenche.saas.dto.clientphysicsaisle.ClientPhysicsAisleExtGoodsDTO;
-import cn.jenche.saas.dto.clientvirtualaisle.ClientVirtualAisleDTO;
+import cn.jenche.saas.dto.clientvirtualaisle.ClientVirtualAisleResponseDTO;
 import cn.jenche.saas.entity.ClientCategoryEntity;
 import cn.jenche.saas.entity.ClientEntity;
 import cn.jenche.saas.service.*;
@@ -83,13 +83,13 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientEntity> implements 
         List<ClientCategoryEntity> clientCategoryEntities = clientCategoryService.FINDALL();
         //查找到终端分类
         ClientCategoryEntity clientCategoryEntity = clientCategoryService.findByIdWithEntitys(clientCategoryEntities, clientEntity.getClientCategoryId());
-        List<ClientVirtualAisleDTO> clientVirtualAisleDTOS = null; //虚拟货道配置
+        List<ClientVirtualAisleResponseDTO> clientVirtualAisleResponseDTOS = null; //虚拟货道配置
         List<ClientPhysicsAisleExtGoodsDTO> clientPhysicsAisleExtGoodsDTOS = null; //物理货道信息
 
         //如果启用了虚拟货道
         if (clientEntity.isEnableVirtualAisle()) {
             // 虚拟货道信息
-            clientVirtualAisleDTOS = clientVirtualAisleService.GET_DTO_BY_CLIENTID(clientEntity.getId());
+            clientVirtualAisleResponseDTOS = clientVirtualAisleService.GET_DTO_BY_CLIENTID(clientEntity.getId());
         } else {
             // 物理货道信息
             clientPhysicsAisleExtGoodsDTOS = clientPhysicsAisleService.GET_DTO_BY_CLIENTID(clientEntity.getId());
@@ -99,7 +99,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientEntity> implements 
         clientDTO.setStatus(clientEntity.isStatus());
         clientDTO.setEnableVirtualAisle(clientEntity.isEnableVirtualAisle());
         clientDTO.setClientPhysicsAisleExtGoodsDTOList(clientPhysicsAisleExtGoodsDTOS);
-        clientDTO.setClientVirtualAisleDTOList(clientVirtualAisleDTOS);
+        clientDTO.setClientVirtualAisleResponseDTOList(clientVirtualAisleResponseDTOS);
         clientDTO.setCreateDate(null);
         clientDTO.setModifyDate(null);
 

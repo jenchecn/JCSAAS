@@ -1,6 +1,3 @@
-/**
- *
- */
 package cn.jenche.saas.dto.clientvirtualaisle;
 
 import cn.jenche.saas.entity.ClientVirtualAisleEntity;
@@ -15,8 +12,8 @@ import lombok.Data;
  * @Description:
  */
 @Data
-@ApiModel(value = "终端虚拟货道")
-public class ClientVirtualAisleDTO extends ClientVirtualAisleEntity {
+@ApiModel(value = "终端虚拟货道输出DTO")
+public class ClientVirtualAisleResponseDTO extends ClientVirtualAisleEntity {
     /**
      * 虚拟货道名字
      */
