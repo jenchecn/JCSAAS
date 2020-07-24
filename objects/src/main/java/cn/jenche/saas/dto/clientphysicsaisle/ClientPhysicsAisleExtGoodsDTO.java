@@ -29,6 +29,8 @@ public class ClientPhysicsAisleExtGoodsDTO extends BaseEntity {
     @ApiModelProperty(value = "折扣", example = "0")
     private int discount = 0;
 
+    @ApiModelProperty(value = "折扣后售价", example = "0.00")
+    private double salePrice = 0;
     /**
      * 库存
      */

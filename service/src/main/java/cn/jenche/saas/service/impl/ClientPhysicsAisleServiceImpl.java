@@ -12,6 +12,7 @@ import cn.jenche.saas.entity.ClientPhysicsAisleEntity;
 import cn.jenche.saas.entity.GoodsEntity;
 import cn.jenche.saas.service.IClientPhysicsAisleService;
 import cn.jenche.saas.service.IGoodsService;
+import cn.jenche.utility.CalculateUtility;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -123,11 +124,15 @@ public class ClientPhysicsAisleServiceImpl
             clientPhysicsAisleExtGoodsDTO.setDiscount(entity.getDiscount());
             clientPhysicsAisleExtGoodsDTO.setInventory(entity.getInventory());
             clientPhysicsAisleExtGoodsDTO.setStatus(entity.isStatus());
+            clientPhysicsAisleExtGoodsDTO.setCreateDate(entity.getCreateDate());
+            clientPhysicsAisleExtGoodsDTO.setModifyDate(entity.getModifyDate());
+
             String goodsId = entity.getGoodsId();
             if (StringUtils.isBlank(goodsId)) {
                 throw new SystemException(ExceptionMessage.S_20_DATA_NOTEXISTS, "goodsId is null");
             }
 
+            //这里使用的是商品价格，未来可能会根据设备群组设定价格
             GoodsEntity goodsEntity = goodsService.ONE_BYID(goodsId);
             clientPhysicsAisleExtGoodsDTO.setGoodsDTO(new GoodsDTO() {{
                 setId(goodsEntity.getId());
@@ -135,7 +140,14 @@ public class ClientPhysicsAisleServiceImpl
                 setCoverImage(goodsEntity.getCoverImage());
                 setOrig(goodsEntity.getOrig());
                 setPrice(goodsEntity.getPrice());
+                setCreateDate(goodsEntity.getCreateDate());
+                setModifyDate(goodsEntity.getModifyDate());
             }});
+
+            double price = goodsEntity.getPrice();
+            int discount = clientPhysicsAisleExtGoodsDTO.getDiscount();
+            double currentPrice = CalculateUtility.goodsOfPrice(price, discount);
+            clientPhysicsAisleExtGoodsDTO.setSalePrice(currentPrice);
 
             clientPhysicsAisleExtGoodsDTOS.add(clientPhysicsAisleExtGoodsDTO);
         }

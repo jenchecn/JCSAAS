@@ -1,7 +1,6 @@
 package cn.jenche.saas.service.impl;
 
 import cn.jenche.core.ExceptionMessage;
-import cn.jenche.core.Pager;
 import cn.jenche.core.SystemException;
 import cn.jenche.saas.dao.mongodb.ClientRepository;
 import cn.jenche.saas.dto.ClientDTO;
@@ -12,12 +11,10 @@ import cn.jenche.saas.entity.ClientEntity;
 import cn.jenche.saas.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.domain.Page;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -44,33 +41,69 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientEntity> implements 
         this.clientCategoryService = clientCategoryService;
     }
 
+    //    public Pager<ClientEntity> LIST_PAGES(Pager<ClientEntity> pager) throws SystemException {
+    //        Page<ClientEntity> clientList = clientRepository.findAll(pager.getPageable());
+    //        List<ClientEntity> list = new LinkedList<>(clientList.getContent());
+    //        List<ClientDTO> clientDTOList = new LinkedList<>();
+    //
+    //        List<ClientCategoryEntity> clientCategoryEntities = clientCategoryService.FINDALL();
+    //
+    //        for (ClientEntity entity : list) {
+    //            // 查找到终端分类
+    //            ClientCategoryEntity clientCategoryEntity = clientCategoryService.findByIdWithEntitys(clientCategoryEntities, entity.getClientCategoryId());
+    //            List<ClientVirtualAisleDTO> clientVirtualAisleDTOS = null; //虚拟货道配置
+    //            List<ClientPhysicsAisleExtGoodsDTO> clientPhysicsAisleExtGoodsDTOS = null; //物理货道信息
+    //
+    //            //如果启用了虚拟货道
+    //            if (entity.isEnableVirtualAisle()) {
+    //                // 虚拟货道信息
+    //                clientVirtualAisleDTOS = clientVirtualAisleService.GET_DTO_BY_CLIENTID(entity.getId());
+    //            } else {
+    //                // 物理货道信息
+    //                clientPhysicsAisleExtGoodsDTOS = clientPhysicsAisleService.GET_DTO_BY_CLIENTID(entity.getId());
+    //            }
+    //            log.debug("{}", clientPhysicsAisleExtGoodsDTOS);
+    //
+    //        }
+    //
+    //        return null;
+    //    }
+
     @Override
-    public Pager<ClientEntity> LIST_PAGES(Pager<ClientEntity> pager) throws SystemException {
-        Page<ClientEntity> clientList = clientRepository.findAll(pager.getPageable());
-        List<ClientEntity> list = new LinkedList<>(clientList.getContent());
-        List<ClientDTO> clientDTOList = new LinkedList<>();
+    public ClientDTO INFO_BY_CODE(String code) throws SystemException {
+        // 先需要查询redis中当前设备是否在线
 
-        List<ClientCategoryEntity> clientCategoryEntities = clientCategoryService.FINDALL();
+        ClientEntity clientEntity = ONE_BYCODE(code);
 
-        for (ClientEntity entity : list) {
-            // 查找到终端分类
-            ClientCategoryEntity clientCategoryEntity = clientCategoryService.findByIdWithEntitys(clientCategoryEntities, entity.getClientCategoryId());
-            List<ClientVirtualAisleDTO> clientVirtualAisleDTOS = null; //虚拟货道配置
-            List<ClientPhysicsAisleExtGoodsDTO> clientPhysicsAisleExtGoodsDTOS = null; //物理货道信息
-
-            //如果启用了虚拟货道
-            if (entity.isEnableVirtualAisle()) {
-                // 虚拟货道信息
-                clientVirtualAisleDTOS = clientVirtualAisleService.GET_DTO_BY_CLIENTID(entity.getId());
-            } else {
-                // 物理货道信息
-                clientPhysicsAisleExtGoodsDTOS = clientPhysicsAisleService.GET_DTO_BY_CLIENTID(entity.getId());
-            }
-            
-
+        //设备状态为禁用
+        if (!clientEntity.isStatus()) {
+            throw new SystemException(ExceptionMessage.S_20_CLIENT_DISENABLE);
         }
 
-        return null;
+        List<ClientCategoryEntity> clientCategoryEntities = clientCategoryService.FINDALL();
+        //查找到终端分类
+        ClientCategoryEntity clientCategoryEntity = clientCategoryService.findByIdWithEntitys(clientCategoryEntities, clientEntity.getClientCategoryId());
+        List<ClientVirtualAisleDTO> clientVirtualAisleDTOS = null; //虚拟货道配置
+        List<ClientPhysicsAisleExtGoodsDTO> clientPhysicsAisleExtGoodsDTOS = null; //物理货道信息
+
+        //如果启用了虚拟货道
+        if (clientEntity.isEnableVirtualAisle()) {
+            // 虚拟货道信息
+            clientVirtualAisleDTOS = clientVirtualAisleService.GET_DTO_BY_CLIENTID(clientEntity.getId());
+        } else {
+            // 物理货道信息
+            clientPhysicsAisleExtGoodsDTOS = clientPhysicsAisleService.GET_DTO_BY_CLIENTID(clientEntity.getId());
+        }
+        ClientDTO clientDTO = new ClientDTO();
+        clientDTO.setNumber(clientEntity.getNumber());
+        clientDTO.setStatus(clientEntity.isStatus());
+        clientDTO.setEnableVirtualAisle(clientEntity.isEnableVirtualAisle());
+        clientDTO.setClientPhysicsAisleExtGoodsDTOList(clientPhysicsAisleExtGoodsDTOS);
+        clientDTO.setClientVirtualAisleDTOList(clientVirtualAisleDTOS);
+        clientDTO.setCreateDate(null);
+        clientDTO.setModifyDate(null);
+
+        return clientDTO;
     }
 
     @Override

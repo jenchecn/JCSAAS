@@ -21,6 +21,7 @@ public enum ExceptionMessage {
     S_20_DELETE_EXISTS_PART(20, "0005"), //存在子数据不允许删除
     S_20_NOTEXISTS_ID(20, "0006"),       //Id不存在 ---所以不能更新数据，常规使用在更新上
     S_20_UPDATE_ERROR(20, "0007"),        //更新出错，这可能是新数据与旧数据冲突或者更新的Id不存在
+    S_20_CLIENT_DISENABLE(20, "0008"),    //终端停用
 
     //50 发生在Controller层，一般为数据的DTO传输层，一般为数据的校验或者传输的参数异常
     C_50_DATA_IS_EMPTY(50, "0001"),      //返回的数据为空

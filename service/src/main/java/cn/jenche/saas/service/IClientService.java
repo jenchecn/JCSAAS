@@ -1,5 +1,7 @@
 package cn.jenche.saas.service;
 
+import cn.jenche.core.SystemException;
+import cn.jenche.saas.dto.ClientDTO;
 import cn.jenche.saas.entity.ClientEntity;
 
 /**
@@ -25,4 +27,12 @@ public interface IClientService extends IBaseService<ClientEntity> {
      * @return {@link boolean}
      */
     boolean existsByCategoryId(String categoryId);
+
+    /**
+     * 根据Client Code获取详细信息
+     *
+     * @param code Client Code
+     * @return {@link ClientDTO}
+     */
+    ClientDTO INFO_BY_CODE(String code) throws SystemException;
 }

@@ -12,6 +12,7 @@ import cn.jenche.saas.dto.ResponseResultDTO;
 import cn.jenche.saas.entity.ClientEntity;
 import cn.jenche.saas.service.IClientService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -43,10 +44,11 @@ public class ClientController extends BaseController {
     }
 
     @ApiOperation("根据code获取数据")
-    @GetMapping(value = "/client/{code}")
-    public ResponseResultDTO byCode(@PathVariable(value = "code") String code) throws SystemException {
-        ClientEntity entity = clientService.ONE_BYCODE(code);
-        return new ResponseResult<>(entity).send();
+    @ApiImplicitParam(paramType = "path", name = "clientCode", value = "终端编码", required = true)
+    @RequestMapping(value = "/client/{clientCode}", method = RequestMethod.GET)
+    public ResponseResultDTO byCode(@PathVariable(name = "clientCode") String clientCode) throws SystemException {
+        ClientDTO clientDTO = clientService.INFO_BY_CODE(clientCode);
+        return new ResponseResult<>(clientDTO).send();
     }
 
     @ApiOperation("终端保存")
