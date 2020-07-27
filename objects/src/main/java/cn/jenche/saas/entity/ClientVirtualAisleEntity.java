@@ -1,6 +1,7 @@
 package cn.jenche.saas.entity;
 
 import cn.jenche.saas.BaseEntity;
+import cn.jenche.saas.dto.clientvirtualaisle.ClientVirtualAisleExtDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -36,5 +37,5 @@ public class ClientVirtualAisleEntity extends BaseEntity {
      */
     @Field(value = "physics_aisle_id_list")
     @ApiModelProperty("物理货道列表")
-    private List<String> physicsAisleIdList;
+    private List<ClientVirtualAisleExtDTO> physicsAisleIdList;
 }
