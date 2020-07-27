@@ -6,4 +6,6 @@ include 'core'
 include 'objects'
 include 'api'
 include 'service-test'
+include 'wechat'
+include 'payment'
 

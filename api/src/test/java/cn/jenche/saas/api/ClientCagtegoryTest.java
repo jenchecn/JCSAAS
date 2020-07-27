@@ -40,7 +40,7 @@ public class ClientCagtegoryTest {
         ClientCategoryType type = ClientCategoryType.V2;
         ClientCategoryEntity clientCategoryEntity = new ClientCategoryEntity();
         clientCategoryEntity.setId(String.valueOf(type.getCode()));
-        clientCategoryEntity.setName(type.getName());
+//        clientCategoryEntity.setName(type.getName());
         clientCategoryEntity.setType(type);
         clientCategoryEntity.setAisles(new ArrayList<Integer>() {{
             add(12);
@@ -58,7 +58,7 @@ public class ClientCagtegoryTest {
         ClientCategoryType type = ClientCategoryType.V1;
         ClientCategoryEntity clientCategoryEntity = new ClientCategoryEntity();
         clientCategoryEntity.setId(String.valueOf(type.getCode()));
-        clientCategoryEntity.setName(type.getName());
+//        clientCategoryEntity.setName(type.getName());
         clientCategoryEntity.setType(type);
         clientCategoryEntity.setAisles(new ArrayList<Integer>() {{
             add(12);
